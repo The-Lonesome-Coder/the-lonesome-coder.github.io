@@ -1,0 +1,305 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>第一章 - 關鍵的第一步 - 為何選擇C++ | Lonesome Coder の Blog</title><meta name="author" content="The Lonesome Coder"><meta name="copyright" content="The Lonesome Coder"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="闡述選擇C++為第一個語言的原因。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一章 - 關鍵的第一步 - 為何選擇C++">
+<meta property="og:url" content="https://lonesomecoder.com/2023-11-05/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E9%97%9C%E9%8D%B5%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5-%E7%82%BA%E4%BD%95%E9%81%B8%E6%93%87c/">
+<meta property="og:site_name" content="Lonesome Coder の Blog">
+<meta property="og:description" content="闡述選擇C++為第一個語言的原因。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://lonesomecoder.com/img/Choice.png">
+<meta property="article:published_time" content="2023-11-05T07:00:00.000Z">
+<meta property="article:modified_time" content="2023-11-05T07:30:00.000Z">
+<meta property="article:author" content="The Lonesome Coder">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Coding">
+<meta property="article:tag" content="Programming">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lonesomecoder.com/img/Choice.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lonesomecoder.com/2023-11-05/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E9%97%9C%E9%8D%B5%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5-%E7%82%BA%E4%BD%95%E9%81%B8%E6%93%87c/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GM1XGLX17E"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GM1XGLX17E');
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"DM3N3DNP8X","apiKey":"05439b9d65773e3f4781ebfadc9dc454","indexName":"my-hexo-blog","hits":{"per_page":6},"languages":{"input_placeholder":"搜尋文章","hits_empty":"找不到您查詢的內容：${query}","hits_stats":"找到 ${hits} 條結果，用時 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":2000,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"作者: The Lonesome Coder","link":"連結: ","source":"來源: Lonesome Coder の Blog","info":"著作權歸作者所有。商業轉載請聯繫作者獲得授權，非商業轉載請註明出處。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切換為繁體中文","cht_to_chs":"你已切換為簡體中文","day_to_night":"你已切換為深色模式","night_to_day":"你已切換為淺色模式","bgLight":"#6977fa","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第一章 - 關鍵的第一步 - 為何選擇C++',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-05 15:30:00'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mouse.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">載入中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my_icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-location-crosshairs"></i><span> 導航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa-regular fa-newspaper"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 所有標籤</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 所有分類</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-regular fa-address-card"></i><span> 關於我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/Choice.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Lonesome Coder の Blog"><img class="site-icon" src="/img/logo.png"/><span class="site-name">Lonesome Coder の Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜尋</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-location-crosshairs"></i><span> 導航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa-regular fa-newspaper"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 所有標籤</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 所有分類</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-regular fa-address-card"></i><span> 關於我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第一章 - 關鍵的第一步 - 為何選擇C++</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-11-05T07:00:00.000Z" title="發表於 2023-11-05 15:00:00">2023-11-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2023-11-05T07:30:00.000Z" title="更新於 2023-11-05 15:30:00">2023-11-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/c/">C++</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/c/programming/">Programming</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字數總計:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀時長:</span><span>3分鐘</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第一章 - 關鍵的第一步 - 為何選擇C++"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src="/2023-11-05/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E9%97%9C%E9%8D%B5%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5-%E7%82%BA%E4%BD%95%E9%81%B8%E6%93%87c/Choice.jpg" alt="每扇打開的門都洋溢著光明，象徵著新機遇和可能性，但選擇哪條路徑卻是每個人必須面對的決定。"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>大家好，很榮幸又和您在此見面。在當今的數字化時代，編程已經成為了必備技能的核心。選擇首個學習的程式語言，就如同選擇學習的第一門外語，充滿了期待與疑惑。那麼，為何我會選擇C++作為我的出發點呢？這其中隱含的原因和影響又會是怎樣的？在以下的文章中，我將分享我的選擇心路歷程，以及C++所帶給我的啟示與挑戰。希望這些心得能為您在編程的道路上提供一絲指引和啟發。<br><br/></p>
+<h2 id="決定第一個語言是否重要"><a href="#決定第一個語言是否重要" class="headerlink" title="決定第一個語言是否重要"></a>決定第一個語言是否重要</h2><p>當我們開始探索編程的世界前，都將面對這關鍵的問題：該選擇哪個程式語言作為起點？這似乎是一道深具分量的問題。有的人認為，第一個語言既影響初學者的起步體驗，又可能對其未來的技術轉型造成深遠影響。但同時，也有關認為第一個語言其實無足輕重，畢竟每個人的程式生涯絕對不可能只接觸一個語言，就如同每種型號的螺絲要使用不同的螺絲起子一樣，不同的問題也會有相對應適合的程式語言來解決。儘管不同人對此有不同的觀點，但我們無法否認，第一個接觸的語言或多或少會塑造我們的技術視野。我個人則認為，第一個語言往往會決定您日後轉入其它語言的適應速度，畢竟由深入淺易，由淺入深難嘛。因此，選擇C++最根本的原因，就是我傾向先苦後甘，先從困難的開始。除此之外，還有幾個原因。<br><br/></p>
+<h2 id="為何選擇C"><a href="#為何選擇C" class="headerlink" title="為何選擇C++"></a>為何選擇C++</h2><p>初探程式時，C++就展現了其在鞏固編程根基上的獨特之處。這是一門促使開發者深入探索電腦運作原理的語言，不僅令人思考“代碼的功能”，更追求其“背後的運作邏輯”。這種深度的洞察，猶如一盞明燈，為學習其他高階語言照亮前路。以C++為例，其核心思想和語法經常滲透於今日的多種程式語言中。因此，當你從C++出發，無論是Python、C#或其他語言，在日後觸碰時你都將更加得心應手。它如同掌中的通用鑰匙，助你順暢地探索多種語言的玄奧。</p>
+<p>再者，C++以出色的性能而自豪。作為一種與硬體更親近的語言，它賦予你近乎直接的記憶體操作能力，讓你能夠細緻調控，追求程式的極致性能。在這個追求效率的時代，能編寫高效程式，已成為職場上的獨特賣點。</p>
+<p>但C++的魅力並不止步於此。其物件導向(Object-Oriented)的特性讓你從初步入手便能學會結構化的設計方法，這對於後續的大型項目開發至關重要。此外，C++還擁有各式各樣的函式庫(Library)，從標準模板庫(Standard Template Library, STL)到各類開源工具，都為開發者開闢了寬廣的學習和實踐場地。這豐富的生態不只滿足你對功能的需求，更刺激你的好奇心，促使你不斷拓展技術視界。</p>
+<p>綜上所述，C++不只是學習程式的良好起點，它鋪設了扎實的基石，激發了解決問題的智慧，並為未來的技術探索展現了無盡可能性。在這趟學習旅程中，每一步都是一次的挑戰，每次的突破都帶來成長和成果。因此，我深信，這條由C++起始的道路，會引領我進入更加廣袤的技術領域。</p>
+<br/>
+
+
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>感謝您耐心地閱讀完這篇文章。如果您有任何寶貴建議或發現需要改進或錯誤之處，我誠摯地邀請您於下方留言分享。在即將到來的下一章，我將會細緻地引領大家進入編程之旅的第一步，其中涵蓋了如何下載C++編譯器、配置完整的文字編輯器以及進行一些Windows系統相關的環境設置。請繼續關注並期待接下來的內容!</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lonesomecoder.com">The Lonesome Coder</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="https://lonesomecoder.com/2023-11-05/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E9%97%9C%E9%8D%B5%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5-%E7%82%BA%E4%BD%95%E9%81%B8%E6%93%87c/">https://lonesomecoder.com/2023-11-05/第一章-關鍵的第一步-為何選擇c/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://lonesomecoder.com" target="_blank">Lonesome Coder の Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/c/">C++</a><a class="post-meta__tags" href="/tags/coding/">Coding</a><a class="post-meta__tags" href="/tags/programming/">Programming</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2023-11-01/%E7%AC%AC%E9%9B%B6%E7%AB%A0-%E5%95%9F%E8%88%AA%E7%A8%8B%E5%BC%8F%E4%B9%8B%E6%97%85-%E6%88%91%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%E4%B9%8B%E5%A7%8B/" title="第零章 - 程式之旅 - 我的部落格之始"><img class="cover" src="/img/Journey_Begin.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第零章 - 程式之旅 - 我的部落格之始</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2023-11-01/%E7%AC%AC%E9%9B%B6%E7%AB%A0-%E5%95%9F%E8%88%AA%E7%A8%8B%E5%BC%8F%E4%B9%8B%E6%97%85-%E6%88%91%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%E4%B9%8B%E5%A7%8B/" title="第零章 - 程式之旅 - 我的部落格之始"><img class="cover" src="/img/Journey_Begin.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-01</div><div class="title">第零章 - 程式之旅 - 我的部落格之始</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 評論</span></div></div><div class="comment-wrap"><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my_icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">The Lonesome Coder</div><div class="author-info__description">Coding Futures. Decoding Dreams. One Line at a Time.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">3</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/The-Lonesome-Coder" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://www.instagram.com/the.lonesome.coder/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram" style="color: #d62976;"></i></a><a class="social-icon" href="mailto:admin@lonesomecoder.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%BA%E5%AE%9A%E7%AC%AC%E4%B8%80%E5%80%8B%E8%AA%9E%E8%A8%80%E6%98%AF%E5%90%A6%E9%87%8D%E8%A6%81"><span class="toc-number">2.</span> <span class="toc-text">決定第一個語言是否重要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%82%BA%E4%BD%95%E9%81%B8%E6%93%87C"><span class="toc-number">3.</span> <span class="toc-text">為何選擇C++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B5%90%E8%AA%9E"><span class="toc-number">4.</span> <span class="toc-text">結語</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023-11-05/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E9%97%9C%E9%8D%B5%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5-%E7%82%BA%E4%BD%95%E9%81%B8%E6%93%87c/" title="第一章 - 關鍵的第一步 - 為何選擇C++"><img src="/img/Choice.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第一章 - 關鍵的第一步 - 為何選擇C++"/></a><div class="content"><a class="title" href="/2023-11-05/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E9%97%9C%E9%8D%B5%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5-%E7%82%BA%E4%BD%95%E9%81%B8%E6%93%87c/" title="第一章 - 關鍵的第一步 - 為何選擇C++">第一章 - 關鍵的第一步 - 為何選擇C++</a><time datetime="2023-11-05T07:00:00.000Z" title="發表於 2023-11-05 15:00:00">2023-11-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023-11-01/%E7%AC%AC%E9%9B%B6%E7%AB%A0-%E5%95%9F%E8%88%AA%E7%A8%8B%E5%BC%8F%E4%B9%8B%E6%97%85-%E6%88%91%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%E4%B9%8B%E5%A7%8B/" title="第零章 - 程式之旅 - 我的部落格之始"><img src="/img/Journey_Begin.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第零章 - 程式之旅 - 我的部落格之始"/></a><div class="content"><a class="title" href="/2023-11-01/%E7%AC%AC%E9%9B%B6%E7%AB%A0-%E5%95%9F%E8%88%AA%E7%A8%8B%E5%BC%8F%E4%B9%8B%E6%97%85-%E6%88%91%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%E4%B9%8B%E5%A7%8B/" title="第零章 - 程式之旅 - 我的部落格之始">第零章 - 程式之旅 - 我的部落格之始</a><time datetime="2023-11-01T07:00:00.000Z" title="發表於 2023-11-01 15:00:00">2023-11-01</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/Footer.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By The Lonesome Coder</div><div class="framework-info"><span>框架 </span><a href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">非常感謝您光臨我的部落格</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直達評論"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const disqus_config = function () {
+    this.page.url = 'https://lonesomecoder.com/2023-11-05/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E9%97%9C%E9%8D%B5%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5-%E7%82%BA%E4%BD%95%E9%81%B8%E6%93%87c/'
+    this.page.identifier = '/2023-11-05/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E9%97%9C%E9%8D%B5%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5-%E7%82%BA%E4%BD%95%E9%81%B8%E6%93%87c/'
+    this.page.title = '第一章 - 關鍵的第一步 - 為何選擇C++'
+  }
+
+  const disqusReset = () => {
+    window.DISQUS && window.DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  btf.addGlobalFn('themeChange', disqusReset, 'disqus')
+
+  const loadDisqus = () =>{
+    if (window.DISQUS) disqusReset()
+    else {
+      const script = document.createElement('script')
+      script.src = 'https://https-lonesomecoder-com.disqus.com/embed.js'
+      script.setAttribute('data-timestamp', +new Date())
+      document.head.appendChild(script)
+    }
+  }
+
+  const getCount = async() => {
+    try {
+      const eleGroup = document.querySelector('#post-meta .disqus-comment-count')
+      if (!eleGroup) return
+      const cleanedLinks = eleGroup.href.replace(/#post-comment$/, '')
+
+      const res = await fetch(`https://disqus.com/api/3.0/threads/set.json?forum=https-lonesomecoder-com&api_key=&thread:link=${cleanedLinks}`,{
+        method: 'GET'
+      })
+      const result = await res.json()
+
+      const count = result.response.length ? result.response[0].posts : 0
+      eleGroup.textContent = count
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if ('Disqus' === 'Disqus' || !false) {
+    if (false) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+    else {
+      loadDisqus()
+      
+    }
+  } else {
+    window.loadOtherComment = loadDisqus
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.8" zIndex="-1" count="80" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜尋</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>
