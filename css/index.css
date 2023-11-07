@@ -6744,11 +6744,12 @@ blockquote.pullquote.right {
   margin: 1.5625em 0;
   padding: 0.6rem;
   overflow: hidden;
-  font-size: 1rem; /* 字體大小 */
+  font-size: 1rem;
   page-break-inside: avoid;
   border-left: 0.3rem solid #42b983;
-/* border-radius: .3rem; 四邊圓角 */
-/* box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,.05), 0 0 0.05rem rgba(0,0,0,.1); 邊框陰影 */
+  border-radius: 0.3rem;
+  -webkit-box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.05), 0 0 0.05rem rgba(0,0,0,0.1);
+  box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.05), 0 0 0.05rem rgba(0,0,0,0.1);
   background-color: #fafafa;
 }
 p.admonition-title {
@@ -6775,7 +6776,7 @@ p.admonition-title {
 .warning>.admonition-title,
 .attention>.admonition-title,
 .caution>.admonition-title {
-  background-color: rgba(255,60,60,0.1);
+  background-color: rgba(255,145,0,0.1);
 }
 .failure>.admonition-title,
 .missing>.admonition-title,
@@ -6790,7 +6791,7 @@ p.admonition-title {
 .admonition.warning,
 .admonition.attention,
 .admonition.caution {
-  border-color: #f34646;
+  border-color: #ff9100;
 }
 .admonition.failure,
 .admonition.missing,
@@ -6806,7 +6807,7 @@ p.admonition-title {
 .warning>.admonition-title::before,
 .attention>.admonition-title::before,
 .caution>.admonition-title::before {
-  background-color: #f34646;
+  background-color: #ff9100;
   border-radius: 50%;
 }
 .failure>.admonition-title::before,
