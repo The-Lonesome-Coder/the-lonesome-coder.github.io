@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>第三章 - 最後準備 - C++歷史與演化</title>
+      <link href="/2023-11-13/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E6%BA%96%E5%82%99-c-%E6%AD%B7%E5%8F%B2%E8%88%87%E6%BC%94%E5%8C%96/"/>
+      <url>/2023-11-13/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E6%BA%96%E5%82%99-c-%E6%AD%B7%E5%8F%B2%E8%88%87%E6%BC%94%E5%8C%96/</url>
+      
+        <content type="html"><![CDATA[<img src=First_Step.png title="陽光下小徑延展，旅者踏出了第一步，新的旅程在曙光中靜靜開啟" height=50% width=50%><div class="admonition info"><p class="admonition-title">參考資料</p><p>主要參考書籍為 - &quot;Horton, I. &amp; Weert, P. V. (2020). <em>Beginning C++20: From Novice to Professional</em> (6th Edition). Apress&quot;。其餘參考資料會在引用部份附上。</p></div><div class="admonition info"><p class="admonition-title">延伸筆記例外</p><p>某些粗體的知識點，鑑於其深度和重要性，將在不久的將來透過專門的文章來進行全面而詳細的闡述。因此，這些特定的知識點在當前的討論中將不包含額外的筆記，以便為它們即將到來的專門文章留下充分的展示空間。</p></div><br/><h2 id="前言"><a class="header-anchor" href="#前言"></a>前言</h2><p>終於，我們即將踏上這激動人心的旅程，特別是對於那些渴望精通C++這門強大語言的朋友們來說。你是否正沐浴在學習的興奮之中？或許你還在遲疑，尋找勇氣去邁出這個重要的第一步。我自己也曾有過這樣的時刻，懷疑自己是否適合這個領域，或者擔心自己開始得太晚。但經過這些日子的思考，我想用幾句話來表達我的心路歷程：“學習程式設計的第一步雖然既令人興奮又充滿挑戰，但它卻是開啟無限可能的門檻。請記得，所有精通程式設計的人都是從新手開始，他們都經歷過疑惑和挑戰，最終才達到今天的高度。因此，不要害怕犯錯或感到困惑，這些都是學習過程中不可或缺的一部分。”</p><p>在這個章節裡，我們將一同深入探索C++的歷史和其逐漸成型的過程。作為一種擁有悠久歷史的程式語言，C++不僅豐富了計算機科學的領域，也持續推動著技術的創新與進步。深入了解C++的過去，將有助於我們更全面地理解其當前的面貌，並為未來的學習奠定堅實的基礎。讓我們一起踏上這段旅程，追溯C++的發展軌跡，看看它是如何從一個初級的概念演變成為今天全球廣泛使用的語言。這不僅僅是一篇文章，更是一場穿梭時光的冒險，讓我們一起揭開這門語言精彩的歷史面紗。<br><br/></p><h2 id="歷史與演化"><a class="header-anchor" href="#歷史與演化"></a>歷史與演化</h2><p>在20世紀70年代末，一位名叫Bjarne Stroustrup的丹麥計算機科學家，在他的研究工作中感受到了C語言在面對複雜問題時的局限性。Stroustrup希望增強<strong>C語言</strong>，讓它能更好地支<strong>數據抽象</strong>和<strong>物件導向編程</strong>，於是他開始了C++的開發工作。1983年，C++被正式命名，標誌著這門新語言的誕生。從那時起，C++迅速發展，成為了一門強大的編程語言。</p><div class="admonition info"><p class="admonition-title">C語言</p><p>C語言是一種高效能的程式語言，於1972年由丹尼斯·里奇在AT&amp;T的貝爾實驗室開發。它是一種通用的程式語言，非常適合系統編程，如作業系統或編譯器開發。C++是C語言的擴展，增加了物件導向等特性，因此C語言的語法絕大部份(並非全部)在C++裡也可以使用。</p><p>如果想更深入了解C與C++的差別，請參閱以下文章:</p><ul><li><a target="_blank" rel="noopener" href="https://www.freecodecamp.org/news/c-vs-cpp-whats-the-difference/">C vs C++ – What's The Difference?</a></li></ul></div><br/><p>從1990年代初到現在，C++經歷了多次重大更新。其中，C++98, C++11、C++14、C++17和C++20都是重要的里程碑，它們分別帶來了:</p><ul><li><p><strong>C++98</strong></p><ul><li><strong>首個標準化版本</strong>: C++98是C++的第一個標準化版本，由國際標準化組織（ISO）發布，即ISO/IEC 14882:1998。。這個版本固化了許多現在被認為是C++基礎的特性，如STL（標準模板庫）、異常處理、命名空間等。<br><br/></li></ul></li><li><p><strong>C++11</strong></p><ul><li>現代C++的開始: 這個版本被廣泛認為是現代C++的開端，它引入了許多革命性的新特性：<ul><li><strong>自動類型推導(auto)</strong>: 簡化變量聲明。</li><li><strong>範圍基於的for循環</strong>: 改善了集合的迭代方式。</li><li><strong>智能指針</strong>: 如unique_ptr和shared_ptr，提供自動記憶體管理。</li><li><strong>Lambda表達式</strong>: 支持匿名函數，增強了函數式編程能力。</li><li><strong>並發和多線程支持</strong>: 包括thread、mutex等，方便多線程編程。<br><br/></li></ul></li></ul></li><li><p><strong>C++14</strong></p><ul><li><strong>改善和擴展</strong>: C++14進一步改善了C++11的特性，並引入了更多的工具和功能。</li><li><strong>泛型Lambda表達式</strong>: 提供更靈活的Lambda。</li><li><strong>返回類型推導</strong>: 函數返回類型可自動推導。</li><li><strong>擴展的constexpr支持</strong>: 允許更多複雜的計算在編譯時完成。<br><br/></li></ul></li><li><p><strong>C++17</strong></p><ul><li><strong>進一步的現代化</strong>: C++17加入了更多現代化的特性，使語言更簡潔、更強大。</li><li><strong>結構化綁定</strong>: 簡化了數據結構的解包。</li><li><strong>if和switch語句中的初始化器</strong>: 改善了語句的寫法。</li><li><strong>內聯變量</strong>: 支持更靈活的變量定義。</li><li><strong>std::optional、std::variant和std::any</strong>: 提供更多標準庫中的工具。<br><br/></li></ul></li><li><p><strong>C++20</strong></p><ul><li><strong>最新的標準</strong>: C++20被認為是自C++11以來最大的一次更新。</li><li><strong>概念(concepts)</strong>: 引入了概念，以表達模板的要求。</li><li><strong>範圍視圖(ranges)</strong>: 提供了一種新的方式來操作和轉換數據集合。</li><li><strong>協程(coroutines)</strong>: 支持協程，改善非同步編程。</li><li><strong>模板的Lambda表達式</strong>: 使Lambda表達式更加強大。<br><br/></li></ul></li></ul><p>以上為一些我個人認為各版本重要的更新，由於篇幅原因，我沒辦法將所有更新一一列出。如果有興趣，可以前往以下網址閱讀更詳細的內容:</p><ul><li><a target="_blank" rel="noopener" href="https://github.com/AnthonyCalandra/modern-cpp-features">Modern C++ Feature - Anthony Calandra</a></li><li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/language/history">History of C++</a><br><br/></li></ul><h2 id="結語"><a class="header-anchor" href="#結語"></a>結語</h2><p>隨著我們走過C++的歷史長河，探索它的演進與革新，我們不僅了解了這門語言的技術細節，更重要的是，我們體會到了學習與成長的精神。從Bjarne Stroustrup的初衷到C++20的最新進展，每一步都凝聚著無數開發者的智慧與汗水，每一次更新都反映出對更好的語言特性的不懈追求。</p><p>對於渴望精通C++的你，這不僅僅是學習一門語言的過程，更是一場自我挑戰與超越的旅程。在這個旅程中，你會遇到困難與挑戰，但正如C++的發展歷程所示，這些困難和挑戰正是成長和進步的契機。當你在學習的路上遇到障礙時，回想這門語言的演進歷程，讓它激勵你繼續前進。</p><p>每個人的學習路徑都是獨一無二的，就像C++自身的演進一樣。不論你處於學習之路的哪個階段，都要記住：持續學習、勇於嘗試、不懼挑戰是達到精通的必經之路。正如我們所探索的那樣，C++的世界是廣闊而深邃的，充滿了無限的可能性與機遇。</p><p>在這篇文章的結尾，我想鼓勵每一位讀者，無論你是初學者還是資深開發者，都要保持對學習的熱情與好奇心。讓我們攜手共進，不斷探索，不斷進步，在C++的世界中開啟屬於我們自己的精彩章節。</p><p>準備好開始了嗎？讓我們一起<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sDGghk50ns0">迎風啟程</a>，正式啟航這段精彩的C++學習之旅吧！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programming </category>
+          
+          <category> C++ </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+            <tag> Coding </tag>
+            
+            <tag> Programming </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>第二章 – 行前準備 – 編程環境配置</title>
       <link href="/2023-11-08/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E2%80%93-%E8%A1%8C%E5%89%8D%E6%BA%96%E5%82%99-%E2%80%93-%E7%B7%A8%E7%A8%8B%E7%92%B0%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
       <url>/2023-11-08/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E2%80%93-%E8%A1%8C%E5%89%8D%E6%BA%96%E5%82%99-%E2%80%93-%E7%B7%A8%E7%A8%8B%E7%92%B0%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
