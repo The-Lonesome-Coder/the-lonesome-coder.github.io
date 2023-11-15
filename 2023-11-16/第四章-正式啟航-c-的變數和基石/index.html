@@ -1,0 +1,488 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>第四章 - 正式啟航 - C++的變數和基石 | Lonesome Coder の Blog</title><meta name="author" content="The Lonesome Coder"><meta name="copyright" content="The Lonesome Coder"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="介紹少數電腦科學的基礎，與C++的變數宣告與初始化。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四章 - 正式啟航 - C++的變數和基石">
+<meta property="og:url" content="https://lonesomecoder.com/2023-11-16/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/">
+<meta property="og:site_name" content="Lonesome Coder の Blog">
+<meta property="og:description" content="介紹少數電腦科學的基礎，與C++的變數宣告與初始化。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://lonesomecoder.com/2023-11-16/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/First_Step.png">
+<meta property="article:published_time" content="2023-11-16T07:00:00.000Z">
+<meta property="article:modified_time" content="2023-11-16T08:00:00.000Z">
+<meta property="article:author" content="The Lonesome Coder">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Coding">
+<meta property="article:tag" content="Programming">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lonesomecoder.com/2023-11-16/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/First_Step.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lonesomecoder.com/2023-11-16/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GM1XGLX17E"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GM1XGLX17E');
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"DM3N3DNP8X","apiKey":"05439b9d65773e3f4781ebfadc9dc454","indexName":"my-hexo-blog","hits":{"per_page":6},"languages":{"input_placeholder":"搜尋文章","hits_empty":"找不到您查詢的內容：${query}","hits_stats":"找到 ${hits} 條結果，用時 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":2000,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"作者: The Lonesome Coder","link":"連結: ","source":"來源: Lonesome Coder の Blog","info":"著作權歸作者所有。商業轉載請聯繫作者獲得授權，非商業轉載請註明出處。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切換為繁體中文","cht_to_chs":"你已切換為簡體中文","day_to_night":"你已切換為深色模式","night_to_day":"你已切換為淺色模式","bgLight":"#6977fa","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第四章 - 正式啟航 - C++的變數和基石',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-16 16:00:00'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mouse.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">載入中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my_icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-location-crosshairs"></i><span> 導航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa-regular fa-newspaper"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 所有標籤</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 所有分類</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-regular fa-address-card"></i><span> 關於我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/2023-11-16/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/First_Step.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Lonesome Coder の Blog"><img class="site-icon" src="/img/logo.png"/><span class="site-name">Lonesome Coder の Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜尋</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-location-crosshairs"></i><span> 導航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa-regular fa-newspaper"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 所有標籤</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 所有分類</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-regular fa-address-card"></i><span> 關於我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第四章 - 正式啟航 - C++的變數和基石</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-11-16T07:00:00.000Z" title="發表於 2023-11-16 15:00:00">2023-11-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2023-11-16T08:00:00.000Z" title="更新於 2023-11-16 16:00:00">2023-11-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/programming/">Programming</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/programming/c/">C++</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字數總計:</span><span class="word-count">3.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀時長:</span><span>12分鐘</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第四章 - 正式啟航 - C++的變數和基石"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><img src=Foundation.png title="在喧囂進展中，基礎默默承載，為遠大夢想提供穩固之根" height=50% width=50%>
+<div class="admonition info"><p class="admonition-title">延伸筆記例外 (再次告知)
+</p><p>某些粗體的知識點，鑑於其深度和重要性，將在不久的將來透過專門的文章來進行全面而詳細的闡述。因此，這些特定的知識點在當前的討論中將不包含額外的筆記，以便為它們即將到來的專門文章留下充分的展示空間。</p>
+</div>
+<div class="admonition info"><p class="admonition-title">我的編程環境 &amp; C++版本
+</p><p>以下為我的編程環境 &amp; C++版本，如無另外註記，未來文章皆為此規格:</p>
+<ul>
+<li>Windows 11 (64-bit)</li>
+<li>Visual Studio Code (最新版，寫文章時為1.84.2)</li>
+<li>MinGW/GCC g++ (最新版，寫文章時為13.2.0)</li>
+<li><strong>C++20</strong>, 國際標準組織號碼: ISO/IEC 14882:2020</li>
+</ul>
+</div>
+<h2 id="前言"><a class="header-anchor" href="#前言"></a>前言</h2>
+<p>在掌握任何一種程式語言的學習旅程中，理解其基礎概念是至關重要的。正如古人所言：“萬丈高樓平地起”，在軟體開發的世界裡，堅實的基礎知識就如同建築物的地基。這一章節，我們將深入探討C++中的基本組成部分 - 變數，這是學習C++之旅中的第一步。<br>
+<br/></p>
+<h2 id="什麼是變數🤔-Variable"><a class="header-anchor" href="#什麼是變數🤔-Variable"></a>什麼是變數🤔 (Variable)?</h2>
+<p>在C++中，<strong>變數</strong>可以被看作是儲存資料的容器。每個變數都有其特定的資料類型與名字，資料類型決定了變數可以儲存什麼樣的資料以及可以在這些資料上進行什麼樣的操作；而名字是用來讓電腦知道你正在操作的是哪個變數。瞭解不同類型的變數對於開發高效、錯誤較少的程式至關重要。</p>
+<div class="admonition info"><p class="admonition-title">變數 - 白話化
+</p><p>如果有點抽象，把每個變數想像成一個盒子，你可以在裡面放任何你想要的東西，比如玩具、書本或糖果。而在程式語言裡，這些盒子叫做「變數」。不同的是，在程式語言裡，你需要幫這些盒子(變數)命名，例如專門放玩具的盒子(變數)，叫做toy；專門放書本的，叫做book···以此類推。</p>
+<p>這些變數可以存儲不同的東西，像是數字、字母或是其他資訊。此外，就像你的盒子可以改變裡面放的東西，C++中的變數也可以改變它們儲存的資訊。例如，一個變數開始時可能儲存了數字10，但之後我們可以改變它，讓它儲存數字20。</p>
+</div>
+<br/>
+<h2 id="C-的基本資料類型-Basic-Data-Type"><a class="header-anchor" href="#C-的基本資料類型-Basic-Data-Type"></a>C++的基本資料類型 (Basic Data Type)</h2>
+<p>每個變數都有特定的資料類型，在瞭解變數是什麼後，接下來，我們將深入探討C++中的基本資料類型。</p>
+<ol>
+<li>整數類型 (Integer Types) - 分為有號整數與無號整數
+<ul>
+<li><strong>short (短整數)</strong>: 可以儲存32<strong>位元</strong>的整數，範圍為-32,768 ↔ 32,767。</li>
+<li><strong>int (標準整數)</strong>: C++標準指定int的大小16位元，最多可以到32位元。我的編成環境為32位元，範圍為-2,147,483,648 ↔ 2,147,483,647。</li>
+<li><strong>long int (長整數)</strong>: C++標準指定long int的大小32位元，最多可以到64位元。我的編成環境為32位元，範圍為-2,147,483,648 ↔ 2,147,483,647。由於在我的編成環境，int為4位元，目前尚未使用過long int。</li>
+<li><strong>long long int (超長整數)</strong>: 可以儲存64位元的整數，範圍為-9,223,372,036,854,775,807 ↔ 9,223,372,036,854,775,807。</li>
+</ul>
+</li>
+</ol>
+<div class="admonition info"><p class="admonition-title">signed (有號) vs unsigned (無號)
+</p><p>signed 和 unsigned 在 C++ 中為所謂的&quot;修飾符&quot;(Modifier)。</p>
+<p>所有整數類型可以分為有號整數(signed integer)與無號整數(unsigned integer)。整數皆默認為有號整數，但可以通過 &quot;unsigned&quot; 修飾符來變成無號整數，也就是不包含負數(等於可以儲存原本範圍的2倍)。因此，unsigned 整數的範圍為:</p>
+<ul>
+<li><strong>unsigned short</strong>: 0 ↔ 65,535。</li>
+<li><strong>unsigned int</strong>: 0 ↔ 4,294,967,295。</li>
+<li><strong>unsigned long int</strong>: 0 ↔ 4,294,967,295。</li>
+<li><strong>unsigned long long int</strong>: 0 ↔ 18,446,744,073,709,551,615。</li>
+</ul>
+</div>
+<div class="admonition info"><p class="admonition-title">位元 (Bit)
+</p><p>算機科學中資訊量的基本單位，是“Binary Digit”的縮寫，直譯為「<strong>二進位</strong>數字」。</p>
+<ul>
+<li>它代表了二進制系統中的一個數字，只能是0或1。</li>
+<li>8位元為1位元組(Byte)。</li>
+</ul>
+</div>
+<div class="admonition info"><p class="admonition-title">二進位 (Binary)
+</p><p>二進制是一種用來表示數字的系統，它只使用兩個數字：0 和 1。這種系統在計算機科學中非常重要，因為它是電腦處理和存儲信息的基礎。</p>
+<p>想像一下，如果你只有兩個數字來表示所有的數字，你該如何做呢？在二進制中，每位元只能是0或1。比如說，二進制的101代表十進制的5。在十進制中，我們有0到9這十個數字來表示數量，而在二進制中，我們只有0和1。</p>
+<p>在二進制中，每一位的值是加倍的。最右邊的位稱為 &quot;個位&quot;，它的值可以是0或1。向左的下一位是 &quot;二位&quot;，它的值可以是0或2。再向左是 &quot;四位&quot;，它的值可以是0或4，依此類推。所以，當你看到一串二進制數字如1101時，你可以將它解釋為8+4+0+1(2<sup>3</sup>x1 + 2<sup>2</sup>x1 + 2<sup>1</sup>x0 + 2<sup>0</sup>x1)，這等於在十進制中的13。</p>
+<p>二進制在電腦科學中非常重要，因為電腦使用電路，這些電路只有開（1）和關（0）兩種狀態。因此，使用二進制可以讓電腦以非常基本的方式處理和存儲信息。简而言之，二進制是計算機科學的基礎，它利用只有0和1的簡單系統來表示和處理所有類型的數據。</p>
+<p>延伸閱讀:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E4%BA%8C%E8%BF%9B%E5%88%B6">二進位 - Wikipedia</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=VsefOJjva5I">什麼是二進位？</a></li>
+</ul>
+</div>
+<br/>
+<ol>
+<li>浮點數類型 (Floating-Point Types) - 帶有小數點的數
+<ul>
+<li><strong>float (單精度浮點數)</strong>: 32位元。範圍為3.4x10<sup>-38</sup> ↔ 3.4x10<sup>38</sup>。精度約為小數點後6~7位。</li>
+<li><strong>double (雙精度浮點數)</strong>: 64位元。範圍為1.7x10<sup>-308</sup> 1.7x10<sup>308</sup>。精度約為小數點後15~16位。</li>
+<li><strong>long double (延伸雙精度浮點數)</strong>: 80位元。範圍為3.4x10<sup>-4932</sup> ↔ 3.4x10<sup>4932</sup>。精度約為小數點後18~19位。</li>
+</ul>
+</li>
+</ol>
+<div class="admonition warning"><p class="admonition-title">unsigned 修飾符
+</p><p>浮點數無法使用修飾符 unsigned。浮點數全部為 signed。原因請參考IEEE 754。</p>
+</div>
+<div class="admonition info"><p class="admonition-title">精度 (Precision)
+</p><p>誠如前面所說，電腦是以二進位制(0與1)儲存資料，不像我們在日常表示浮點數時，是以10進位(或分數)來表示。因此，電腦在表示浮點數時，當遇到不能被精確表示的浮點數時(例如: 1/3為0.33333循環)，電腦會尋找最接近的可表示值，這就導致了所謂的「舍入誤差」。舍入誤差在進行多次數學運算時可能會累積，導致最終結果與預期有顯著差異。</p>
+<p>浮點數是採用IEEE 754標準格式來表示，具體表示方式需要單獨拉出一篇文章來講解，在此就先記得浮點數會失精度就可以了。</p>
+<p>如果有興趣，我推薦以下文章與影片:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://medium.com/starbugs/see-why-floating-point-error-can-not-be-avoided-from-ieee-754-809720b32175">從 IEEE 754 標準來看為什麼浮點誤差是無法避免的</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/IEEE_754">IEEE 754 - Wikipedia</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=RuKkePyo9zk">IEEE 754 Standard for Floating Point Binary Arithmetic</a></li>
+</ul>
+</div>
+<br/>
+<ol start="3">
+<li>字元類型 (Character Types) - 文字 (例如英文字母、中文文字)
+<ul>
+<li><strong>char (字元)</strong>: 8位元。可以儲存一個<strong>ASCII</strong>字母。</li>
+<li><strong>wchar_t (寬字元)</strong>: 16位元。可以儲存寬字元，通常用於表示<strong>Unicode</strong>字符。</li>
+<li>剩下的字元類型有char8_t、char16_t、char32_t，分別用來儲存UTF-8、UTF-16、UTF-32字符，在此不展開探討。</li>
+</ul>
+</li>
+</ol>
+<div class="admonition info"><p class="admonition-title">unsigned 修飾符
+</p><p>unsigned 修飾符可以用在char上，以順利使用256擴展版本的ASCII。</p>
+</div>
+<div class="admonition info"><p class="admonition-title">美國標準資訊交換碼 (American Standard Code for Information Interchange, ASCII)
+</p><p>一種用於表示文字在電腦中的編碼系統。</p>
+<ul>
+<li>最初是為了美國的電腦和通信設備而設計的，但後來成為全球最廣泛使用的文字編碼之一。</li>
+<li>ASCII使用8位元來表示每個字符，這使它可以表示128（或256在擴展版本中）不同的字符。</li>
+<li>每個字符（如字母、數字、標點符號）都被分配了一個特定的數字代碼。例如，大寫字母 &quot;A&quot; 的ASCII代碼是65，小寫的 &quot;a&quot; 是97。</li>
+</ul>
+<p>ASCII號碼對照表請參考 (特別看一下英文字母對應的ASCII數字代碼):</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.ascii-code.com/">ASCII Table</a></li>
+</ul>
+</div>
+<div class="admonition info"><p class="admonition-title">Universal Character Encoding Standard (Unicode)
+</p><p>一種電腦編碼標準，它的目的是為了解決傳統編碼系統所面臨的一個主要問題：不同的編碼系統不兼容。</p>
+<p>在Unicode出現之前，世界各地有許多不同的編碼系統，用於表示各自語言的文字。這導致了一個問題，即不同語言和系統之間的文檔和數據很難交換和理解。</p>
+<p>Unicode的核心思想是為世界上所有的文字和符號提供一個唯一的代碼（即一個獨特的編號）。例如，英文字母 “A” 在Unicode中有一個獨特的代碼(U+0041)，而漢字 “中” 也有另一個獨特的代碼(U+4E2D)。這樣，不論使用哪種語言，只要系統支持 Unicode，就能正確顯示和處理這些文字。</p>
+<p>Unicode涵蓋了從古典至現代的各種文字系統，包括標點符號、數字、符號，甚至是表情符號。因此，它使得全球不同語言和符號的數位交換成為可能，大大促進了全球信息交流的便利性。最普遍的編碼格式是和ASCII相容的UTF-8。</p>
+<p>想多瞭解Unicode，我推薦以下文章:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/Unicode">Unicode - Wikipedia</a></li>
+</ul>
+</div>
+<br/>
+<ol>
+<li>
+<p>布林類型 (Boolean Type) - 用於表示簡單的是或不是、真或假的情況，多用於進行邏輯判斷，從而控制程式的流程</p>
+<ul>
+<li><strong>true (真)</strong></li>
+<li><strong>false (假)</strong><br>
+<br/></li>
+</ul>
+</li>
+<li>
+<p>無類型 (Void Type) - 通常用於指定函式不返回任何值 (未來講到函式再探討)</p>
+<ul>
+<li><strong>void (無類型)</strong><br>
+<br/></li>
+</ul>
+</li>
+</ol>
+<h2 id="註解"><a class="header-anchor" href="#註解"></a>註解</h2>
+<p>開始之前，先來說說什麼是註解(Comment):</p>
+<p>C++中的註解是一種程式碼中的說明或備註，用於幫助理解程式碼的功能或意圖，但不會被編譯器編譯成執行程式的一部分。換句話說，註解是給人閱讀的，而非給電腦執行的。</p>
+<p>註解對於維護程式碼、解釋複雜的邏輯或記錄程式碼的修改非常重要。它們可以幫助其他開發者（或未來的你）更快地理解程式碼的目的和功能。但是，過多或冗餘的註解可能會使程式碼雜亂無章，因此應適度地使用註解。</p>
+<p>在C++中，有兩種主要的註解方式：</p>
+<ol>
+<li>單行註解：用兩個斜線（//）開始，持續到該行的結尾。例如： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 這是一個單行註解</span></span><br><span class="line"><span class="type">int</span> number = <span class="number">5</span>;   <span class="comment">// 這是一個單行註解</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<br/>
+<ol start="2">
+<li>多行註解：由斜線和星號（/<em>）開始，並由星號和斜線（</em>/）結束。它可以跨越多行。例如： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 這是一個</span></span><br><span class="line"><span class="comment"> *  多行註解</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> number = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<br/>
+<p>理解註解後，直接進入主題。<br>
+<br/></p>
+<h2 id="變數的宣告與初始化"><a class="header-anchor" href="#變數的宣告與初始化"></a>變數的宣告與初始化</h2>
+<p>宣告變數主要是為了讓電腦知道某個名稱將會儲存什麼樣的資料類型，並在未來可以使用它。</p>
+<p>在C++中，變數宣告的方式如下:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 宣告方式: &quot;(資料類型) (變數名稱);&quot;</span></span><br><span class="line"><span class="type">int</span> number;</span><br></pre></td></tr></table></figure>
+<p>這裡，“int” 是變數的類型，代表整數，而 “number” 是變數的名稱。</p>
+<p>而初始化變數是為了給變數指定一個初始值。變數可以在宣告時<strong>初始化</strong>，例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化方式: &quot;(資料類型) (變數名稱) &#123; (值) &#125;;&quot;</span></span><br><span class="line"><span class="comment">// 宣告一個整數變數，變數名稱為 &quot;number&quot;，初始化的值為10</span></span><br><span class="line"><span class="type">int</span> number &#123; <span class="number">10</span> &#125;;</span><br></pre></td></tr></table></figure>
+<div class="admonition warning"><p class="admonition-title">初始化變數的重要性
+</p><p>初始化變數是一個好習慣，因為它防止了在程式中不小心使用未初始化的變數。如果使用了為初始化的變數，可能導致<strong>未被定義的行為</strong>。</p>
+</div>
+<div class="admonition warning"><p class="admonition-title">未被定義的行為 (Undefined Behavior)
+</p><p>指當程式碼中的操作或情況不被C++標準所明確定義時發生的行為。這意味著編譯器在遇到未定義行為時，有權採取任何行動，甚至不採取任何行動。這可能導致程序行為不預期、不一致，甚至導致程序崩潰。使用未初始化的變數是一個例子，其他例子未來會在遇到時告知。</p>
+</div>
+<div class="admonition warning"><p class="admonition-title">變數名稱規則 (Variable Name Rule)
+</p><p>在C++中，變數名稱的規則如下:</p>
+<ul>
+<li><strong>母和數字</strong>：變數名稱可以包含字母（a-z，A-Z）和數字（0-9），但是不能以數字開頭。</li>
+<li><strong>底線</strong>：可以使用底線（_），並且變數名稱可以以底線開頭。但要注意不要使用雙底線或底線後接大寫字母開頭的變數名(例如: __Variable)，這些被保留給標準程式庫使用。</li>
+<li><strong>大小寫敏感</strong>：C++是大小寫敏感的語言，這意味著Variable、variable和VARIABLE會被視為三個不同的變數。</li>
+<li><strong>不含空格和特殊字符</strong>：變數名稱不能包含空格、標點符號或特殊字符（如%, #, @等）。</li>
+<li><strong>不使用關鍵字</strong>：不能使用C++的<strong>保留關鍵字</strong>作為變數名，例如int、float、return、for···等。</li>
+</ul>
+</div>
+<div class="admonition info"><p class="admonition-title">保留關鍵字 (Reserved Keyword)
+</p><p>C++中的保留關鍵字是那些被C++賦予特殊意義並用於執行特定操作的單詞。這些關鍵字不能用作變數名稱，因為它們已經為語言核心功能預留。</p>
+<p>常見的關鍵字有: int, float, double, if, else, switch···等。</p>
+<p>完整的關鍵字表請查閱:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/keyword">C++ keywords</a></li>
+</ul>
+</div>
+<br/>
+<h2 id="結語"><a class="header-anchor" href="#結語"></a>結語</h2>
+<p>今天就先到這裡啦。隨著我們逐步揭開C++這一強大語言的面紗，從最基本的變數類型開始，我們已經踏上了一段精彩的學習之旅。每一種數據類型不僅是編程的基本元素，更象徵著無限的可能性。它們就像是不同的畫筆，在計算機科學的廣闊畫布上勾勒出獨特而複雜的圖景。</p>
+<p>作為初學者，你可能會感到有些許挑戰，但正是這些挑戰塑造了一個優秀的程序員。隨著時間的推移，這些基礎知識將成為你解決更複雜問題的基石。每個變數、每行代碼都是你在這個充滿創造力的領域中的一步。</p>
+<p>在C++的世界裡，不斷的學習和實踐將引領你走向更高的高度。隨著你的知識庫逐漸豐富，你將能夠開發出更加強大和高效的應用程序，並且在這個不斷變化的科技世界中留下自己的足跡。因此，擁抱這段旅程，享受每一次學習和創造的樂趣，並期待著你所能達到的美好未來。</p>
+<p>下一篇，我們將探索<strong>輸入輸出</strong>、<strong>整數的計算</strong>、一些重要的<strong>標準程式庫</strong>與其提供的<strong>函式</strong>。古語有云：“熟能生巧”，這正是我們接下來要實踐的智慧。因此，從下一篇文章開始，我將為您提供精心設計的練習題，旨在幫助您將新學到的知識牢牢銘記。這些練習將是您知識之樹的深根，讓所學的每一概念都在您的心智中生根發芽。</p>
+<p>敬請期待我們的下一次探險，一起在C++的世界中更進一步，開啟學習的新篇章，共同見證知識轉化為技能的奇妙旅程。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lonesomecoder.com">The Lonesome Coder</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="https://lonesomecoder.com/2023-11-16/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/">https://lonesomecoder.com/2023-11-16/第四章-正式啟航-c-的變數和基石/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://lonesomecoder.com" target="_blank">Lonesome Coder の Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/c/">C++</a><a class="post-meta__tags" href="/tags/coding/">Coding</a><a class="post-meta__tags" href="/tags/programming/">Programming</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2023-11-13/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E6%BA%96%E5%82%99-c-%E6%AD%B7%E5%8F%B2%E8%88%87%E6%BC%94%E5%8C%96/" title="第三章 - 最後準備 - C++歷史與演化"><img class="cover" src="/2023-11-13/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E6%BA%96%E5%82%99-c-%E6%AD%B7%E5%8F%B2%E8%88%87%E6%BC%94%E5%8C%96/Embarkation.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第三章 - 最後準備 - C++歷史與演化</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2023-11-13/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E6%BA%96%E5%82%99-c-%E6%AD%B7%E5%8F%B2%E8%88%87%E6%BC%94%E5%8C%96/" title="第三章 - 最後準備 - C++歷史與演化"><img class="cover" src="/2023-11-13/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E6%BA%96%E5%82%99-c-%E6%AD%B7%E5%8F%B2%E8%88%87%E6%BC%94%E5%8C%96/Embarkation.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-13</div><div class="title">第三章 - 最後準備 - C++歷史與演化</div></div></a></div><div><a href="/2023-11-08/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E2%80%93-%E8%A1%8C%E5%89%8D%E6%BA%96%E5%82%99-%E2%80%93-%E7%B7%A8%E7%A8%8B%E7%92%B0%E5%A2%83%E9%85%8D%E7%BD%AE/" title="第二章 – 行前準備 – 編程環境配置"><img class="cover" src="/img/Prepare.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-08</div><div class="title">第二章 – 行前準備 – 編程環境配置</div></div></a></div><div><a href="/2023-11-05/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E9%97%9C%E9%8D%B5%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5-%E7%82%BA%E4%BD%95%E9%81%B8%E6%93%87c/" title="第一章 - 關鍵的第一步 - 為何選擇C++"><img class="cover" src="/img/Choice.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-05</div><div class="title">第一章 - 關鍵的第一步 - 為何選擇C++</div></div></a></div><div><a href="/2023-11-01/%E7%AC%AC%E9%9B%B6%E7%AB%A0-%E5%95%9F%E8%88%AA%E7%A8%8B%E5%BC%8F%E4%B9%8B%E6%97%85-%E6%88%91%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%E4%B9%8B%E5%A7%8B/" title="第零章 - 程式之旅 - 我的部落格之始"><img class="cover" src="/img/Journey_Begin.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-01</div><div class="title">第零章 - 程式之旅 - 我的部落格之始</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 評論</span></div></div><div class="comment-wrap"><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my_icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">The Lonesome Coder</div><div class="author-info__description">Coding Futures. Decoding Dreams. One Line at a Time.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/The-Lonesome-Coder" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://www.instagram.com/the.lonesome.coder/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram" style="color: #d62976;"></i></a><a class="social-icon" href="mailto:admin@lonesomecoder.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E8%AE%8A%E6%95%B8%F0%9F%A4%94-Variable"><span class="toc-number">2.</span> <span class="toc-text">什麼是變數🤔 (Variable)?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%B3%87%E6%96%99%E9%A1%9E%E5%9E%8B-Basic-Data-Type"><span class="toc-number">3.</span> <span class="toc-text">C++的基本資料類型 (Basic Data Type)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A8%BB%E8%A7%A3"><span class="toc-number">4.</span> <span class="toc-text">註解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%8A%E6%95%B8%E7%9A%84%E5%AE%A3%E5%91%8A%E8%88%87%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">5.</span> <span class="toc-text">變數的宣告與初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B5%90%E8%AA%9E"><span class="toc-number">6.</span> <span class="toc-text">結語</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023-11-16/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/" title="第四章 - 正式啟航 - C++的變數和基石"><img src="/2023-11-16/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/First_Step.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第四章 - 正式啟航 - C++的變數和基石"/></a><div class="content"><a class="title" href="/2023-11-16/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/" title="第四章 - 正式啟航 - C++的變數和基石">第四章 - 正式啟航 - C++的變數和基石</a><time datetime="2023-11-16T07:00:00.000Z" title="發表於 2023-11-16 15:00:00">2023-11-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023-11-13/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E6%BA%96%E5%82%99-c-%E6%AD%B7%E5%8F%B2%E8%88%87%E6%BC%94%E5%8C%96/" title="第三章 - 最後準備 - C++歷史與演化"><img src="/2023-11-13/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E6%BA%96%E5%82%99-c-%E6%AD%B7%E5%8F%B2%E8%88%87%E6%BC%94%E5%8C%96/Embarkation.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第三章 - 最後準備 - C++歷史與演化"/></a><div class="content"><a class="title" href="/2023-11-13/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E6%BA%96%E5%82%99-c-%E6%AD%B7%E5%8F%B2%E8%88%87%E6%BC%94%E5%8C%96/" title="第三章 - 最後準備 - C++歷史與演化">第三章 - 最後準備 - C++歷史與演化</a><time datetime="2023-11-13T07:00:00.000Z" title="發表於 2023-11-13 15:00:00">2023-11-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023-11-08/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E2%80%93-%E8%A1%8C%E5%89%8D%E6%BA%96%E5%82%99-%E2%80%93-%E7%B7%A8%E7%A8%8B%E7%92%B0%E5%A2%83%E9%85%8D%E7%BD%AE/" title="第二章 – 行前準備 – 編程環境配置"><img src="/img/Prepare.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第二章 – 行前準備 – 編程環境配置"/></a><div class="content"><a class="title" href="/2023-11-08/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E2%80%93-%E8%A1%8C%E5%89%8D%E6%BA%96%E5%82%99-%E2%80%93-%E7%B7%A8%E7%A8%8B%E7%92%B0%E5%A2%83%E9%85%8D%E7%BD%AE/" title="第二章 – 行前準備 – 編程環境配置">第二章 – 行前準備 – 編程環境配置</a><time datetime="2023-11-08T09:00:00.000Z" title="發表於 2023-11-08 17:00:00">2023-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023-11-05/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E9%97%9C%E9%8D%B5%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5-%E7%82%BA%E4%BD%95%E9%81%B8%E6%93%87c/" title="第一章 - 關鍵的第一步 - 為何選擇C++"><img src="/img/Choice.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第一章 - 關鍵的第一步 - 為何選擇C++"/></a><div class="content"><a class="title" href="/2023-11-05/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E9%97%9C%E9%8D%B5%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5-%E7%82%BA%E4%BD%95%E9%81%B8%E6%93%87c/" title="第一章 - 關鍵的第一步 - 為何選擇C++">第一章 - 關鍵的第一步 - 為何選擇C++</a><time datetime="2023-11-05T07:00:00.000Z" title="發表於 2023-11-05 15:00:00">2023-11-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023-11-01/%E7%AC%AC%E9%9B%B6%E7%AB%A0-%E5%95%9F%E8%88%AA%E7%A8%8B%E5%BC%8F%E4%B9%8B%E6%97%85-%E6%88%91%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%E4%B9%8B%E5%A7%8B/" title="第零章 - 程式之旅 - 我的部落格之始"><img src="/img/Journey_Begin.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第零章 - 程式之旅 - 我的部落格之始"/></a><div class="content"><a class="title" href="/2023-11-01/%E7%AC%AC%E9%9B%B6%E7%AB%A0-%E5%95%9F%E8%88%AA%E7%A8%8B%E5%BC%8F%E4%B9%8B%E6%97%85-%E6%88%91%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC%E4%B9%8B%E5%A7%8B/" title="第零章 - 程式之旅 - 我的部落格之始">第零章 - 程式之旅 - 我的部落格之始</a><time datetime="2023-11-01T07:00:00.000Z" title="發表於 2023-11-01 15:00:00">2023-11-01</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/Footer.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By The Lonesome Coder</div><div class="framework-info"><span>框架 </span><a href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">非常感謝您光臨我的部落格</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直達評論"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const disqus_config = function () {
+    this.page.url = 'https://lonesomecoder.com/2023-11-16/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/'
+    this.page.identifier = '/2023-11-16/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/'
+    this.page.title = '第四章 - 正式啟航 - C++的變數和基石'
+  }
+
+  const disqusReset = () => {
+    window.DISQUS && window.DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  btf.addGlobalFn('themeChange', disqusReset, 'disqus')
+
+  const loadDisqus = () =>{
+    if (window.DISQUS) disqusReset()
+    else {
+      const script = document.createElement('script')
+      script.src = 'https://https-lonesomecoder-com.disqus.com/embed.js'
+      script.setAttribute('data-timestamp', +new Date())
+      document.head.appendChild(script)
+    }
+  }
+
+  const getCount = async() => {
+    try {
+      const eleGroup = document.querySelector('#post-meta .disqus-comment-count')
+      if (!eleGroup) return
+      const cleanedLinks = eleGroup.href.replace(/#post-comment$/, '')
+
+      const res = await fetch(`https://disqus.com/api/3.0/threads/set.json?forum=https-lonesomecoder-com&api_key=&thread:link=${cleanedLinks}`,{
+        method: 'GET'
+      })
+      const result = await res.json()
+
+      const count = result.response.length ? result.response[0].posts : 0
+      eleGroup.textContent = count
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if ('Disqus' === 'Disqus' || !false) {
+    if (false) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+    else {
+      loadDisqus()
+      
+    }
+  } else {
+    window.loadOtherComment = loadDisqus
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.8" zIndex="-1" count="80" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜尋</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>
