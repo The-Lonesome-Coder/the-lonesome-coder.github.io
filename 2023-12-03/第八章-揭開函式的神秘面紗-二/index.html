@@ -1,0 +1,418 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>第八章 - 揭開函式的神秘面紗 (二) | Lonesome Coder の Blog</title><meta name="author" content="The Lonesome Coder"><meta name="copyright" content="The Lonesome Coder"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="介紹函式的Pass-by-Value與Pass-by-Reference。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第八章 - 揭開函式的神秘面紗 (二)">
+<meta property="og:url" content="https://lonesomecoder.com/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/">
+<meta property="og:site_name" content="Lonesome Coder の Blog">
+<meta property="og:description" content="介紹函式的Pass-by-Value與Pass-by-Reference。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://lonesomecoder.com/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/Function.png">
+<meta property="article:published_time" content="2023-12-03T07:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-03T08:00:00.000Z">
+<meta property="article:author" content="The Lonesome Coder">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Coding">
+<meta property="article:tag" content="Programming">
+<meta property="article:tag" content="Function">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lonesomecoder.com/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/Function.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lonesomecoder.com/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GM1XGLX17E"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GM1XGLX17E');
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"DM3N3DNP8X","apiKey":"05439b9d65773e3f4781ebfadc9dc454","indexName":"my-hexo-blog","hits":{"per_page":6},"languages":{"input_placeholder":"搜尋文章","hits_empty":"找不到您查詢的內容：${query}","hits_stats":"找到 ${hits} 條結果，用時 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":2000,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"作者: The Lonesome Coder","link":"連結: ","source":"來源: Lonesome Coder の Blog","info":"著作權歸作者所有。商業轉載請聯繫作者獲得授權，非商業轉載請註明出處。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切換為繁體中文","cht_to_chs":"你已切換為簡體中文","day_to_night":"你已切換為深色模式","night_to_day":"你已切換為淺色模式","bgLight":"#6977fa","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第八章 - 揭開函式的神秘面紗 (二)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-03 16:00:00'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mouse.css"><meta name="generator" content="Hexo 7.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">載入中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my_icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-location-crosshairs"></i><span> 導航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa-regular fa-newspaper"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 所有標籤</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 所有分類</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-regular fa-address-card"></i><span> 關於我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/Function.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Lonesome Coder の Blog"><img class="site-icon" src="/img/logo.png"/><span class="site-name">Lonesome Coder の Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜尋</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-location-crosshairs"></i><span> 導航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa-regular fa-newspaper"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 所有標籤</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 所有分類</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-regular fa-address-card"></i><span> 關於我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第八章 - 揭開函式的神秘面紗 (二)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-12-03T07:00:00.000Z" title="發表於 2023-12-03 15:00:00">2023-12-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2023-12-03T08:00:00.000Z" title="更新於 2023-12-03 16:00:00">2023-12-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/programming/">Programming</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/programming/c/">C++</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字數總計:</span><span class="word-count">3.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀時長:</span><span>13分鐘</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第八章 - 揭開函式的神秘面紗 (二)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="admonition info"><p class="admonition-title">前提條件
+</p><p>本篇文章默認讀者已經閱讀過上一篇文章，並對 C++ 的函式有一定的基礎。</p>
+</div>
+<br/>
+<h1>本文</h1>
+<h2 id="前言"><a class="header-anchor" href="#前言"></a>前言</h2>
+<p>嗨，親愛的程式設計大師們，歡迎回到我們充滿激情的程式設計之旅！今天，我們繼續潛入 C++ 函式的迷人世界，一起探索其深奧與精妙之處。</p>
+<p>原本打算為大家揭露一些關於數字運算的高效函式庫，然而為了保持內容的精煉與專注，我們決定將這個精彩的主題留待下一章節詳細展開。</p>
+<p>無論你是剛踏入 C++ 世界的新手，還是擁有豐富經驗的資深開發者，我堅信這篇文章將為你帶來全新的啟發與見解。現在，就讓我們一起啟程，踏上今天的程式設計探險之旅吧！但在我們深入探討今天的核心話題之前，先讓我們一起來理解兩個極為關鍵且重要的概念 - const 和 Reference。<br>
+<br/></p>
+<h2 id="const-常數-類型修飾符"><a class="header-anchor" href="#const-常數-類型修飾符"></a>const (常數 - 類型修飾符)</h2>
+<p>想像一下，你有一個寶貴的東西，比如你最愛的咖啡杯，你肯定不想別人隨便動它對吧？在 C++ 中，const 就像是給變數或對象貼上一個 “請勿觸摸” 的標籤。</p>
+<p>當你在變數前加上 const，你其實是在告訴電腦: “嘿，這個變數是特別的，我不想它被改變。” 以下為宣告常數的方式:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> number1 &#123; <span class="number">7</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 宣告一個變數叫 number，類別是常數整數，值為 7</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> number2 &#123; <span class="number">7</span> &#125;;</span><br><span class="line"></span><br><span class="line">std::cout &lt;&lt; number1 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 7</span></span><br><span class="line">std::cout &lt;&lt; number2 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 將 number1 的值修改成 8</span></span><br><span class="line">number1 = <span class="number">8</span>;</span><br><span class="line">std::cout &lt;&lt; number1 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 編譯器會報錯，常數不應該被修改</span></span><br><span class="line">number2 = <span class="number">8</span>;</span><br></pre></td></tr></table></figure>
+<p>將常數宣告為常數有幾個好處:</p>
+<ul>
+<li><strong>安全性</strong>：防止不小心改變了不應該改變的變數。</li>
+<li><strong>易讀性</strong>：當其他人或未來的你看到 const，就會知道這個變數應該保持不變。</li>
+<li><strong>優化</strong>：編譯器看到 const，有時能進行一些優化，因為它知道這個值不會改變。<br>
+<br/></li>
+</ul>
+<p>而在函式的領域內，const 更是扮演重要的角色，這裡先賣個關子，等等再揭曉。<br>
+<br/></p>
+<h2 id="Reference-引用-參考"><a class="header-anchor" href="#Reference-引用-參考"></a>Reference (引用 / 參考)</h2>
+<p>想像一下，你有一本非常喜歡的書，你想讓你的好友也看看。你可以把書直接給他們，但這樣你就沒有書了。另一個辦法是給他們一張寫有書在哪裡的便條紙，這樣他們就可以找到並閱讀這本書，而你也還保留著這本書。在 C++ 中，Reference 就像是那張便條紙。</p>
+<p>當你在 C++ 中創建一個 Reference，你其實是創建了一個變數的別名。這意味著，當你通過這個 Reference 修改數據時，實際上是在修改它引用的那個變數。而要在 C++ 裡創建一個 Reference，需要用到 “&amp;” (Ampersand) 運算符。更重要的是， Reference 的類型必須與用來初始化的值的類型一致 (如果有 const 也需要一致)，不一致會報錯:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> number &#123; <span class="number">10</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 宣告一個變數叫做 ref，資料類型為整數引用 (int&amp;)，使用 number 來初始化</span></span><br><span class="line"><span class="comment">// number 為 int ➝ ref 也必須為 int，再加一個 &quot;&amp;&quot; 代表是 Reference (Reference 的資料類型必須與用來初始化的值的類型一致)</span></span><br><span class="line"><span class="comment">// Reference 本身不儲存任何值，它是另一個變數的 &quot;別名&quot;，所以一定要初始化</span></span><br><span class="line"><span class="comment">// (仔細想想，一個別名 (或綽號) 不代表任何東西，很不合理吧？)</span></span><br><span class="line"><span class="type">int</span>&amp; ref &#123; number &#125;;</span><br></pre></td></tr></table></figure>
+<p>在這裡，ref 就是 number 的一個 Reference。當你改變 ref 的值時，number 的值也會跟著改變，因為它們其實是同一個東西的兩個名字:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> number &#123; <span class="number">10</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 宣告一個變數叫做 ref，類型為整數引用，初始值</span></span><br><span class="line">    <span class="type">int</span>&amp; ref &#123; number &#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; number &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 備註: 初始化值使用大括號 (&#123;&#125;)，修改值則用等於符號 (=)，未來會再細說兩者的區別</span></span><br><span class="line">    ref = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; number &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 20</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到這裡你可能會覺得，Reference 有什麼用？確實，純粹的 Reference 是沒什麼用，但它在 C++ 函式中扮演極其重要的角色，我們來看看吧！<br>
+<br/></p>
+<h2 id="Pass-by-Value-vs-Pass-by-Reference"><a class="header-anchor" href="#Pass-by-Value-vs-Pass-by-Reference"></a>Pass-by-Value vs Pass-by-Reference</h2>
+<p>接下來就書接上回，當我們談到函式的重要概念 - 如何傳遞參數。傳遞參數主要有兩種方式：Pass-by-Value (值傳遞) 和 Pass-by-Reference (引用傳遞)。</p>
+<p>我們先用簡單的方式來解釋這兩者的差距:</p>
+<ul>
+<li>
+<p><strong>Pass-by-Value (按值傳遞)</strong></p>
+<ul>
+<li>這就像是你給朋友抄一份食譜，他們拿著抄錄的食譜去做菜。在這種情況下，無論朋友怎麼樣使用或改動那份抄錄的食譜，都不會影響到你手中的原始食譜書。</li>
+<li>在C++中，當你按值傳遞一個變數時，其實就是創建了這個變數的一個副本 (複製變數)。這個副本是獨立的，對它的任何更改都不會反映到原始數據上。<br>
+<br/></li>
+</ul>
+</li>
+<li>
+<p><strong>Pass-by-Reference (按引用傳遞)</strong></p>
+<ul>
+<li>這好比你直接把你的食譜書借給朋友。這時候，如果朋友在食譜上做了標記或改動，當你拿回書時，這些更改也會出現在你的食譜書上。</li>
+<li>在C++中，按引用傳遞則意味著你實際上是傳遞了對原始數據的直接參考（或地址）。所以，函數內的任何更改都會直接影響到那個原始變量。<br>
+<br/></li>
+</ul>
+</li>
+</ul>
+<p>在大概理解這兩者的差別後，我們來以實際代碼來看它們的差別:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 宣告一個函式叫做 modify_add_pass_by_value()，接受兩個整數參數，並回傳一個整數</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">modify_add_pass_by_value</span><span class="params">(<span class="type">int</span> num1, <span class="type">int</span> num2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 將傳進來的 num1 修改為 10</span></span><br><span class="line">    num1 = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 將傳進來的 num2 修改為 20</span></span><br><span class="line">    num2 = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 宣告一個函式叫做 modify_add_pass_by_reference()，接受兩個參數 num1、num2，並回傳一個整數</span></span><br><span class="line"><span class="comment">// 仔細看，int 後面有個 &quot;&amp;&quot;，代表以引用傳遞</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">modify_add_pass_by_reference</span><span class="params">(<span class="type">int</span>&amp; num1, <span class="type">int</span>&amp; num2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 將傳進來的 num1 修改為 10</span></span><br><span class="line">    num1 = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 將傳進來的 num2 修改為 20</span></span><br><span class="line">    num2 = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> num1 &#123; <span class="number">1</span> &#125;, num2 &#123; <span class="number">2</span> &#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; num1 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;      <span class="comment">// 1</span></span><br><span class="line">    std::cout &lt;&lt; num2 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;      <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> result1 &#123; <span class="built_in">modify_add_pass_by_value</span>(num1, num2) &#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; num1 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;      <span class="comment">// 1</span></span><br><span class="line">    std::cout &lt;&lt; num2 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;      <span class="comment">// 2</span></span><br><span class="line">    std::cout &lt;&lt; result1 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 30</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> result2 &#123; <span class="built_in">modify_add_pass_by_reference</span>(num1, num2) &#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; num1 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;      <span class="comment">// 10</span></span><br><span class="line">    std::cout &lt;&lt; num2 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;      <span class="comment">// 20</span></span><br><span class="line">    std::cout &lt;&lt; result2 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 30</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+<p>以上兩個函式的區別與流程如下:</p>
+<ul>
+<li>
+<p>在 main() 函式內，首先，我們宣告兩個變數 num1、num2，類型為整數，值為 1 和 2。接下來我們將兩個值印出來，分別為 1 和 2 (這很合理)。接下來我們呼叫第一個函式 - modify_add_pass_by_value()。</p>
+</li>
+<li>
+<p>modify_add_pass_by_value() 接受兩個整數參數，並回傳一個整數。我們將兩個變數 num1、num2 傳入這個函式。因為兩個函式是以 Pass-by-Value 的方式傳入的，所以兩個變數會被複製後才傳入。被複製的 num1、num2 被傳入後，被複製的 num1 的值會被修改為 10、被複製的 num2 的值會被修改為 20，最後再將兩個值相加回傳。</p>
+</li>
+<li>
+<p>我們將 modify_add_pass_by_value() 回傳的值 - 30 - 儲存進一個新的變數 result1。接下來我們把 num1、num2、result1 的值印出來，分別為 1、2、30。這可以證明，Pass-by-Value 會將原先的變數複製後才傳進去，所以在函式裡做的任何改變 (將 num1 改成 10、num2 改成 20)，對原本的變數 (main() 裡的 num1、num2) 不會有任何影響。</p>
+</li>
+<li>
+<p>接下來，我們將兩個變數再次傳入 modify_add_pass_by_reference()。</p>
+</li>
+<li>
+<p>modify_add_pass_by_reference() 接受兩個整數參數，並回傳一個整數。我們將兩個變數 num1、num2 傳入這個函式。因為兩個函式是以 Pass-by-Reference 傳入的，所以 num1、num2 會原封不動地被傳進去。num1、num2 被傳入後，num1 的值會被修改為 10、num2 的值會被修改為 20，最後再將兩個值相加回傳。</p>
+</li>
+<li>
+<p>我們將 modify_add_pass_by_reference() 回傳的值 - 30 - 儲存進一個新的變數 result2。接下來我們把 num1、num2、result1 的值印出來，結果分別為 10、20、30。這可以證明 Pass-by-Reference 會將原先的變數原封不動傳進去，在函式裡做的任何改變，會直接改變原本的變數。<br>
+<br/></p>
+</li>
+</ul>
+<p><strong>本段總結:</strong><br>
+到這裡，應該可以很清楚地知道兩者的差別。一個是將原先的變數<strong>複製</strong>後才傳進去，在函式裡做的任何改變，對原本的變數不會有任何影響；一個是將原先的變數<strong>原封不動</strong>傳進去，在函式裡做的任何改變，會直接改變原本的變數。<br>
+<br/></p>
+<h2 id="兩個要選哪一個？"><a class="header-anchor" href="#兩個要選哪一個？"></a>兩個要選哪一個？</h2>
+<p>至於要使用哪個呢？以下是<strong>目前</strong>適用的簡單的選擇方式 (以優先級排序):</p>
+<ol>
+<li>
+<p>如果需要修改原先的變數，以 Pass-by-Reference 傳入。</p>
+</li>
+<li>
+<p>如果不需要修改原先的變數，但<strong>並非內建資料類型</strong> (內建資料類型包含 int、float、char···等)，以 “const Pass-by-Reference” 傳入。</p>
+</li>
+<li>
+<p>如果不需要修改原先的變數，但為<strong>內建資料類型</strong>，以 Pass-by-Value 傳入。<br>
+<br/></p>
+</li>
+</ol>
+<p>第二點是最重要的，這就是為什麼我們在這章需要先理解 const 的原因。由於 Pass-by-Value 需要先複製再傳入，而複製某些 <strong>非內建資料類型</strong> (例如 <strong>std::vector</strong>、<strong>std::string</strong>···等 (後面章節會探討)) 的代價非常大 (程式速度變慢、記憶體空間變大)，所以我們不能讓它們被複製，而是需要直接原封不動地傳進去。但為了防止它們的值不小心被修改，我們要在函式的參數列表內加上 const，以防止函式修改該變數。而參數列表內被宣告為 const 的參數可以接受 const 或非 const 的該類別的變數。請看以下:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 由於我們還沒講非內建資料類型，我們先用 int 來做範例</span></span><br><span class="line"><span class="comment">// 平時如果參數是內建資料類型 ，請遵照第三點 - 以 Pass-by-Value 傳入</span></span><br><span class="line"><span class="comment">// 我們將參數列表內的資料類型從 int 變成 const int</span></span><br><span class="line"><span class="comment">// 由於我們將參數宣告為 const，這個函式現在會報錯</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">modify_add_pass_by_reference</span><span class="params">(<span class="type">const</span> <span class="type">int</span>&amp; num1, <span class="type">const</span> <span class="type">int</span>&amp; num2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 將傳進來的 num1 修改為 10 - 會報錯，const 不能被修改</span></span><br><span class="line">    num1 = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 將傳進來的 num2 修改為 20 - 會報錯，const 不能被修改</span></span><br><span class="line">    num2 = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+<p>由於上面的函式會報錯，我們把它修改成不會報錯的:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 由於參數被宣告為 const，我們不需要擔心它們會不小心被修改</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">add</span><span class="params">(<span class="type">const</span> <span class="type">int</span>&amp; num1, <span class="type">const</span> <span class="type">int</span>&amp; num2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> num1 &#123; <span class="number">5</span> &#125;, num2 &#123; <span class="number">10</span> &#125;;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> num3 &#123; <span class="number">15</span> &#125;, num4 &#123; <span class="number">20</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 參數列表內被宣告為 const 的參數可以接受 const 或非 const 的該類別的變數</span></span><br><span class="line">    <span class="type">int</span> result1 &#123; <span class="built_in">add</span>(num1, num2) &#125;;   <span class="comment">// 傳入的變數非const int，但函式接受</span></span><br><span class="line">    <span class="type">int</span> result2 &#123; <span class="built_in">add</span>(num3, num4) &#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; result1 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 15</span></span><br><span class="line">    std::cout &lt;&lt; result2 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 35</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+<p><strong>本段總結:</strong></p>
+<ul>
+<li>“只要變數需要在函式內被修改”，以 Pass-by-Reference 傳入。</li>
+<li>“只要變數在函式內不會被修改，並且非內建資料類型”，以 const Pass-by-Reference 傳入。</li>
+<li>“只要變數不需要被修改，但為內建資料類型”，以 Pass-by-Value 傳入。<br>
+<br/></li>
+</ul>
+<h2 id="練習題"><a class="header-anchor" href="#練習題"></a>練習題</h2>
+<ol>
+<li>宣告並定義一個函式稱為 add_three()，接受三個浮點數參數，以 Pass-by-Reference 傳入。將三個浮點數各自加1後，相加三個新的值並回傳相加後的浮點數。請用以下代碼測試:</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 將自定義的 add_three() 放在這</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Driver Code</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> num1 &#123; <span class="number">10.6</span> &#125;, num2 &#123; <span class="number">5.8</span> &#125;, num3 &#123; <span class="number">1.2</span> &#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">add_three</span>(num1, num2, num3) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 結果應為20.6</span></span><br><span class="line">    std::cout &lt;&lt; num1 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 11.6</span></span><br><span class="line">    std::cout &lt;&lt; num2 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 6.8</span></span><br><span class="line">    std::cout &lt;&lt; num3 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 2.2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<br/>
+<h2 id="結語"><a class="header-anchor" href="#結語"></a>結語</h2>
+<p>恭喜你！您已順利完成本章節，精通了 C++ 中兩項核心概念：const 和 Reference，及其在函數參數傳遞上的實際運用。我們深入探討了 Pass-by-Value 與 Pass-by-Reference 的異同，指引您如何針對不同的情景選擇最適宜的傳遞方法。這些知識對於提升您的程式設計技巧極為關鍵，不僅能夠增強程式的效率，同時也增進代碼的安全性與可讀性。</p>
+<p>請記住，雖然這些概念在初學時可能顯得複雜，但隨著不斷的實踐與運用，它們將逐漸變得明晰。我們鼓勵您進行練習，以鞏固您今日所學的知識。此外，切勿忘記，編程就如同藝術創作，總有新奇的領域等待您去探索與創新。</p>
+<p>在下一章節，我們將深入 C++ 的數字運算相關函式庫，為您開啟另一扇充滿驚奇的大門。期盼見證您在這段學習旅程中的每一步成長，祝您學習順利，繼續加油！<br>
+<br/></p>
+<h1>附件</h1>
+<h2 id="練習題簡答"><a class="header-anchor" href="#練習題簡答"></a>練習題簡答</h2>
+<ol>
+<li>宣告並定義一個函式稱為 add_three()，接受三個浮點數參數，以 Pass-by-Reference 傳入。將三個浮點數各自加1後，相加三個新的值並回傳相加後的浮點數。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 將自定義的 add_three() 放在這</span></span><br><span class="line"><span class="function"><span class="type">float</span> <span class="title">add_three</span><span class="params">(<span class="type">float</span>&amp; num1, <span class="type">float</span>&amp; num2, <span class="type">float</span>&amp; num3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 以下三種方式都是將變數的值加 1</span></span><br><span class="line">    num1 = num1 + <span class="number">1</span>;        <span class="comment">// 將 num1 加 1 後，儲存進 num1 (等於修改 num1 的值)</span></span><br><span class="line">    num2 += <span class="number">1</span>;              <span class="comment">// 與 1. 一樣，如果等號左邊與右邊的變數是相同的，可以使用此縮寫</span></span><br><span class="line">    num3++;                 <span class="comment">// 除了 2. 的條件外，如果只是要加 1，可以使用此縮寫</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> num1 + num2 + num3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Driver Code</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> num1 &#123; <span class="number">10.6</span> &#125;, num2 &#123; <span class="number">5.8</span> &#125;, num3 &#123; <span class="number">1.2</span> &#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">add_three</span>(num1, num2, num3) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 結果應為20.6</span></span><br><span class="line">    std::cout &lt;&lt; num1 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 11.6</span></span><br><span class="line">    std::cout &lt;&lt; num2 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 6.8</span></span><br><span class="line">    std::cout &lt;&lt; num3 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 2.2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lonesomecoder.com">The Lonesome Coder</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="https://lonesomecoder.com/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/">https://lonesomecoder.com/2023-12-03/第八章-揭開函式的神秘面紗-二/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://lonesomecoder.com" target="_blank">Lonesome Coder の Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/c/">C++</a><a class="post-meta__tags" href="/tags/coding/">Coding</a><a class="post-meta__tags" href="/tags/programming/">Programming</a><a class="post-meta__tags" href="/tags/function/">Function</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2023-11-28/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%B8%80/" title="第七章 - 揭開函式的神秘面紗 (一)"><img class="cover" src="/2023-11-28/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%B8%80/Abstract_Function.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第七章 - 揭開函式的神秘面紗 (一)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2023-11-28/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%B8%80/" title="第七章 - 揭開函式的神秘面紗 (一)"><img class="cover" src="/2023-11-28/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%B8%80/Abstract_Function.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-28</div><div class="title">第七章 - 揭開函式的神秘面紗 (一)</div></div></a></div><div><a href="/2023-11-25/%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%81%8B%E7%AE%97%E7%9A%84%E8%97%9D%E8%A1%93/" title="第六章 - 運算的藝術"><img class="cover" src="/2023-11-25/%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%81%8B%E7%AE%97%E7%9A%84%E8%97%9D%E8%A1%93/Binary_Rain.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-25</div><div class="title">第六章 - 運算的藝術</div></div></a></div><div><a href="/2023-11-22/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E8%88%87%E6%95%B8%E6%93%9A%E6%B5%81%E5%8B%95/" title="第五章 - 標準函式庫與數據流動"><img class="cover" src="/2023-11-22/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E8%88%87%E6%95%B8%E6%93%9A%E6%B5%81%E5%8B%95/Data_Flow.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-22</div><div class="title">第五章 - 標準函式庫與數據流動</div></div></a></div><div><a href="/2023-11-17/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/" title="第四章 - 正式啟航 - C++的變數和基石"><img class="cover" src="/2023-11-17/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/First_Step.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-17</div><div class="title">第四章 - 正式啟航 - C++的變數和基石</div></div></a></div><div><a href="/2023-11-13/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E6%BA%96%E5%82%99-c-%E6%AD%B7%E5%8F%B2%E8%88%87%E6%BC%94%E5%8C%96/" title="第三章 - 最後準備 - C++歷史與演化"><img class="cover" src="/2023-11-13/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E6%BA%96%E5%82%99-c-%E6%AD%B7%E5%8F%B2%E8%88%87%E6%BC%94%E5%8C%96/Embarkation.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-13</div><div class="title">第三章 - 最後準備 - C++歷史與演化</div></div></a></div><div><a href="/2023-11-08/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E2%80%93-%E8%A1%8C%E5%89%8D%E6%BA%96%E5%82%99-%E2%80%93-%E7%B7%A8%E7%A8%8B%E7%92%B0%E5%A2%83%E9%85%8D%E7%BD%AE/" title="第二章 – 行前準備 – 編程環境配置"><img class="cover" src="/img/Prepare.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-08</div><div class="title">第二章 – 行前準備 – 編程環境配置</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 評論</span></div></div><div class="comment-wrap"><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my_icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">The Lonesome Coder</div><div class="author-info__description">Coding Futures. Decoding Dreams. One Line at a Time.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/The-Lonesome-Coder" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://www.instagram.com/the.lonesome.coder/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram" style="color: #d62976;"></i></a><a class="social-icon" href="mailto:admin@lonesomecoder.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">本文</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#const-%E5%B8%B8%E6%95%B8-%E9%A1%9E%E5%9E%8B%E4%BF%AE%E9%A3%BE%E7%AC%A6"><span class="toc-number">1.2.</span> <span class="toc-text">const (常數 - 類型修飾符)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference-%E5%BC%95%E7%94%A8-%E5%8F%83%E8%80%83"><span class="toc-number">1.3.</span> <span class="toc-text">Reference (引用 &#x2F; 參考)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-by-Value-vs-Pass-by-Reference"><span class="toc-number">1.4.</span> <span class="toc-text">Pass-by-Value vs Pass-by-Reference</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A9%E5%80%8B%E8%A6%81%E9%81%B8%E5%93%AA%E4%B8%80%E5%80%8B%EF%BC%9F"><span class="toc-number">1.5.</span> <span class="toc-text">兩個要選哪一個？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B7%B4%E7%BF%92%E9%A1%8C"><span class="toc-number">1.6.</span> <span class="toc-text">練習題</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B5%90%E8%AA%9E"><span class="toc-number">1.7.</span> <span class="toc-text">結語</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">附件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B7%B4%E7%BF%92%E9%A1%8C%E7%B0%A1%E7%AD%94"><span class="toc-number">2.1.</span> <span class="toc-text">練習題簡答</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/" title="第八章 - 揭開函式的神秘面紗 (二)"><img src="/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/Function.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第八章 - 揭開函式的神秘面紗 (二)"/></a><div class="content"><a class="title" href="/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/" title="第八章 - 揭開函式的神秘面紗 (二)">第八章 - 揭開函式的神秘面紗 (二)</a><time datetime="2023-12-03T07:00:00.000Z" title="發表於 2023-12-03 15:00:00">2023-12-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023-11-28/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%B8%80/" title="第七章 - 揭開函式的神秘面紗 (一)"><img src="/2023-11-28/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%B8%80/Abstract_Function.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第七章 - 揭開函式的神秘面紗 (一)"/></a><div class="content"><a class="title" href="/2023-11-28/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%B8%80/" title="第七章 - 揭開函式的神秘面紗 (一)">第七章 - 揭開函式的神秘面紗 (一)</a><time datetime="2023-11-28T07:00:00.000Z" title="發表於 2023-11-28 15:00:00">2023-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023-11-25/%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%81%8B%E7%AE%97%E7%9A%84%E8%97%9D%E8%A1%93/" title="第六章 - 運算的藝術"><img src="/2023-11-25/%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%81%8B%E7%AE%97%E7%9A%84%E8%97%9D%E8%A1%93/Binary_Rain.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第六章 - 運算的藝術"/></a><div class="content"><a class="title" href="/2023-11-25/%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%81%8B%E7%AE%97%E7%9A%84%E8%97%9D%E8%A1%93/" title="第六章 - 運算的藝術">第六章 - 運算的藝術</a><time datetime="2023-11-25T07:00:00.000Z" title="發表於 2023-11-25 15:00:00">2023-11-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023-11-22/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E8%88%87%E6%95%B8%E6%93%9A%E6%B5%81%E5%8B%95/" title="第五章 - 標準函式庫與數據流動"><img src="/2023-11-22/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E8%88%87%E6%95%B8%E6%93%9A%E6%B5%81%E5%8B%95/Data_Flow.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第五章 - 標準函式庫與數據流動"/></a><div class="content"><a class="title" href="/2023-11-22/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E8%88%87%E6%95%B8%E6%93%9A%E6%B5%81%E5%8B%95/" title="第五章 - 標準函式庫與數據流動">第五章 - 標準函式庫與數據流動</a><time datetime="2023-11-22T07:00:00.000Z" title="發表於 2023-11-22 15:00:00">2023-11-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023-11-17/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/" title="第四章 - 正式啟航 - C++的變數和基石"><img src="/2023-11-17/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/First_Step.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第四章 - 正式啟航 - C++的變數和基石"/></a><div class="content"><a class="title" href="/2023-11-17/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/" title="第四章 - 正式啟航 - C++的變數和基石">第四章 - 正式啟航 - C++的變數和基石</a><time datetime="2023-11-17T07:00:00.000Z" title="發表於 2023-11-17 15:00:00">2023-11-17</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/Footer.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By The Lonesome Coder</div><div class="framework-info"><span>框架 </span><a href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">非常感謝您光臨我的部落格</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直達評論"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const disqus_config = function () {
+    this.page.url = 'https://lonesomecoder.com/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/'
+    this.page.identifier = '/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/'
+    this.page.title = '第八章 - 揭開函式的神秘面紗 (二)'
+  }
+
+  const disqusReset = () => {
+    window.DISQUS && window.DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  btf.addGlobalFn('themeChange', disqusReset, 'disqus')
+
+  const loadDisqus = () =>{
+    if (window.DISQUS) disqusReset()
+    else {
+      const script = document.createElement('script')
+      script.src = 'https://https-lonesomecoder-com.disqus.com/embed.js'
+      script.setAttribute('data-timestamp', +new Date())
+      document.head.appendChild(script)
+    }
+  }
+
+  const getCount = async() => {
+    try {
+      const eleGroup = document.querySelector('#post-meta .disqus-comment-count')
+      if (!eleGroup) return
+      const cleanedLinks = eleGroup.href.replace(/#post-comment$/, '')
+
+      const res = await fetch(`https://disqus.com/api/3.0/threads/set.json?forum=https-lonesomecoder-com&api_key=&thread:link=${cleanedLinks}`,{
+        method: 'GET'
+      })
+      const result = await res.json()
+
+      const count = result.response.length ? result.response[0].posts : 0
+      eleGroup.textContent = count
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if ('Disqus' === 'Disqus' || !false) {
+    if (false) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+    else {
+      loadDisqus()
+      
+    }
+  } else {
+    window.loadOtherComment = loadDisqus
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.8" zIndex="-1" count="80" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜尋</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>
