@@ -1,0 +1,372 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>第九章 - 數學標準函式庫的精髓 | Lonesome Coder の Blog</title><meta name="author" content="The Lonesome Coder"><meta name="copyright" content="The Lonesome Coder"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="介紹標準函式庫 、、 所提供的好用的函式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第九章 - 數學標準函式庫的精髓">
+<meta property="og:url" content="https://lonesomecoder.com/2023-12-08/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B8%E5%AD%B8%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%9A%84%E7%B2%BE%E9%AB%93/">
+<meta property="og:site_name" content="Lonesome Coder の Blog">
+<meta property="og:description" content="介紹標準函式庫 、、 所提供的好用的函式。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://lonesomecoder.com/2023-12-08/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B8%E5%AD%B8%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%9A%84%E7%B2%BE%E9%AB%93/Library.png">
+<meta property="article:published_time" content="2023-12-08T07:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-08T08:00:00.000Z">
+<meta property="article:author" content="The Lonesome Coder">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Coding">
+<meta property="article:tag" content="Programming">
+<meta property="article:tag" content="Standard Library">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lonesomecoder.com/2023-12-08/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B8%E5%AD%B8%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%9A%84%E7%B2%BE%E9%AB%93/Library.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lonesomecoder.com/2023-12-08/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B8%E5%AD%B8%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%9A%84%E7%B2%BE%E9%AB%93/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GM1XGLX17E"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GM1XGLX17E');
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"DM3N3DNP8X","apiKey":"05439b9d65773e3f4781ebfadc9dc454","indexName":"my-hexo-blog","hits":{"per_page":6},"languages":{"input_placeholder":"搜尋文章","hits_empty":"找不到您查詢的內容：${query}","hits_stats":"找到 ${hits} 條結果，用時 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":2000,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"作者: The Lonesome Coder","link":"連結: ","source":"來源: Lonesome Coder の Blog","info":"著作權歸作者所有。商業轉載請聯繫作者獲得授權，非商業轉載請註明出處。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切換為繁體中文","cht_to_chs":"你已切換為簡體中文","day_to_night":"你已切換為深色模式","night_to_day":"你已切換為淺色模式","bgLight":"#6977fa","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第九章 - 數學標準函式庫的精髓',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-08 16:00:00'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mouse.css"><meta name="generator" content="Hexo 7.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">載入中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my_icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-location-crosshairs"></i><span> 導航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa-regular fa-newspaper"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 所有標籤</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 所有分類</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-regular fa-address-card"></i><span> 關於我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/2023-12-08/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B8%E5%AD%B8%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%9A%84%E7%B2%BE%E9%AB%93/Library.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Lonesome Coder の Blog"><img class="site-icon" src="/img/logo.png"/><span class="site-name">Lonesome Coder の Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜尋</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-location-crosshairs"></i><span> 導航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa-regular fa-newspaper"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 所有標籤</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 所有分類</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-regular fa-address-card"></i><span> 關於我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第九章 - 數學標準函式庫的精髓</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-12-08T07:00:00.000Z" title="發表於 2023-12-08 15:00:00">2023-12-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2023-12-08T08:00:00.000Z" title="更新於 2023-12-08 16:00:00">2023-12-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/programming/">Programming</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/programming/c/">C++</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字數總計:</span><span class="word-count">2.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀時長:</span><span>10分鐘</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第九章 - 數學標準函式庫的精髓"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="admonition info"><p class="admonition-title">前提條件
+</p><p>本篇文章默認讀者對 C++ 函式、變數、數字相關資料類型熟悉，並至少理解基本數學概念。</p>
+</div>
+<br/>
+<h1>本文</h1>
+<h2 id="前言"><a class="header-anchor" href="#前言"></a>前言</h2>
+<p>在編程的宇宙中，數學是一條閃耀的銀河，既神秘又迷人。作為這宇宙中的探險者，我們經常需要依靠數學的力量來解決問題、創造奇跡。今天，我們將一起漫步在 C++ 的數學路徑上，探索那些隱藏在 &lt;numeric&gt; 、 &lt;cmath&gt; 和 &lt;numbers&gt; 這三個神奇函式庫中，非常好用的函式。</p>
+<p>本文僅會介紹一些我能懂、較基礎的函式，相對困難的在我的知識範圍之外，還請見諒。</p>
+<p>無論你是初探 C++ 的新手，還是在這個領域裡遨遊多年的老手，這些函式庫總能為你的編程之旅增添一份驚喜和靈感。讓我們輕鬆地開啟這段旅程，一起領略 C++ 數學函式庫的美妙與深邃。<br>
+<br/></p>
+<h2 id="標準函式庫-numbers"><a class="header-anchor" href="#標準函式庫-numbers"></a>標準函式庫 - &lt;numbers&gt;</h2>
+<p>先從簡單的開始。C++ 的 &lt;numbers&gt; 是一個在 C++20 標準引入的函式庫，它提供了對各種數學常數的標準。這些常數被定義在 std::numbers 命名空間中，資料類型為 double。使用這些常數可以提高代碼的效率和精確度。</p>
+<p>以下是一些主要的數學常數及其用途 (並非全部)，包含範例：</p>
+<ul>
+<li><strong>std::numbers::e</strong> - 自然對數的底數e，常用於指數函數和對數函數。</li>
+<li><strong>std::numbers::pi</strong> - 表示圓周率π，用於圓形和球形幾何計算。</li>
+<li><strong>std::numbers::sqrt2</strong> - 2 的平方根。</li>
+<li><strong>std::numbers::sqrt3</strong> - 3 的平方根。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 請注意，&lt;numbers&gt; 是 C++20 標準引入的函式庫，以下代碼需要以 C++20 標準編譯</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;numbers&gt;</span>   <span class="comment">// 要使用 &lt;numbers&gt; 函式庫定義的變數，必需要引入該函式庫</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 圓的半徑</span></span><br><span class="line">    <span class="type">double</span> radius &#123; <span class="number">5.0</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 計算圓的周長 - 半徑 * 2 * pi</span></span><br><span class="line">    <span class="type">double</span> circlePerimeter &#123; radius * <span class="number">2</span> * std::numbers::pi &#125;;</span><br><span class="line">    std::cout &lt;&lt; circlePerimeter &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 31.4159</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 計算圓的面積 - 半徑 * 半徑 * pi</span></span><br><span class="line">    <span class="type">double</span> circleArea &#123; radius * radius * std::numbers::pi &#125;;</span><br><span class="line">    std::cout &lt;&lt; circleArea &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 78.5398</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果想更加瞭解 &lt;numbers&gt; 函式庫，我推薦前往此網站閱讀 - <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/numeric/constants">CppReference - Mathematical constants</a>。<br>
+<br/></p>
+<h2 id="標準函式庫-numeric"><a class="header-anchor" href="#標準函式庫-numeric"></a>標準函式庫 - &lt;numeric&gt;</h2>
+<p>C++ 的 &lt;numeric&gt; 函式庫提供了一系列與數值操作相關的函數，這些功能主要用於執行數學計算、數據分析和數字處理。這裡先介紹幾個目前最受用的函式，未來會一步一步慢慢介紹。</p>
+<ul>
+<li><strong>std::gcd()</strong> - 接受兩個整數，找出兩個整數的最大公因數，並回傳該數。</li>
+<li><strong>std::lcm()</strong> - 接受兩個整數，找出兩個整數的最小公倍數，並回傳該數。</li>
+<li><strong>std::midpoint()</strong> - 接受兩個整數或浮點數，找出兩個整數的中間值，並回傳該值。如果兩數為整數，且相加為奇數，無條件捨去小數點。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;numeric&gt;</span>   <span class="comment">// 要使用上述的兩個函式，需要引入 &lt;numeric&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 兩個整數</span></span><br><span class="line">    <span class="type">int</span> num1 &#123; <span class="number">10</span> &#125;, num2 &#123; <span class="number">15</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找出最大公因數並印出</span></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">gcd</span>(num1, num2) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 5</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找出最小公倍數並印出</span></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">lcm</span>(num1, num2) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 30</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找出中間值並印出 - 需以 C++20 標準編譯</span></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">midpoint</span>(num1, num2) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 12</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+<p>如果想更加瞭解 &lt;numeric&gt; 函式庫，我推薦此網站 - <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/header/numeric">CppReference - Standard library header &lt;numeric&gt;</a>。<br>
+<br/></p>
+<h2 id="標準函式庫-cmath"><a class="header-anchor" href="#標準函式庫-cmath"></a>標準函式庫 - &lt;cmath&gt;</h2>
+<p>本日重點！C++ 的 &lt;cmath&gt; 函式庫原本式 C 語言的 &lt;math.h&gt; 標準函式庫，被 C++ 引用過來，並將所有函式修改成符合 C++ 標準。</p>
+<p>&lt;cmath&gt; 是一個提供數學運算函數的標準函式庫，主要用於執行各種數學計算，涵蓋了從基礎算術到複雜函數。本日會介紹一些重要且好用的函式。</p>
+<ul>
+<li><strong>std::pow()</strong> - 接受兩個數字，分別為底數和指數，回傳(底數)的(指數)次方，回傳值為浮點數。</li>
+<li><strong>std::sqrt()</strong> - 接受一個數字，計算該數的平方根，回傳該結果。回傳為是浮點數。</li>
+<li><strong>std::cbrt()</strong> - 接受一個數字，計算該數的立方根，回傳該結果。回傳為是浮點數。</li>
+<li><strong>std::abs()</strong> - 接受一個數字，計算該數的絕對值，回傳該結果。回傳值為浮點數。</li>
+<li><strong>std::log10()</strong> - 接受一個數字，計算log10(數字)，回傳該結果。回傳值為浮點數。</li>
+<li><strong>std::ceil()</strong> - 接受一個數字，無條件進位至整數位。回傳值為浮點數。</li>
+<li><strong>std::floor()</strong> - 接受一個數字，回傳最接近、相對較小的整數。回傳值為浮點數。</li>
+<li><strong>std::trunc()</strong> - 接受一個數字，無條件捨去至整數位。回傳值為浮點數。</li>
+<li><strong>std::round()</strong> - 接受一個數字，四捨五入至整數位。回傳值為浮點數。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> num1 &#123; <span class="number">5</span> &#125;, num2 &#123; <span class="number">3</span> &#125;, num3 &#123; <span class="number">-8</span> &#125;, num4 &#123; <span class="number">100</span> &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">pow</span>(num1, num2) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;      <span class="comment">// 5 的 3 次方，125</span></span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">sqrt</span>(num1) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;           <span class="comment">// 5 的平方根，2.23607</span></span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">cbrt</span>(num1) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;           <span class="comment">// 5 的立方根，1.70998</span></span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">abs</span>(num3) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;            <span class="comment">// -8 的絕對值，8</span></span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">log10</span>(num4) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;          <span class="comment">// log10(100)，100 是 10 的 2 次方，2</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> f1 &#123; <span class="number">2.7</span> &#125;, f2 &#123; <span class="number">-2.3</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 無條件進位至整數位</span></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">ceil</span>(f1) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;             <span class="comment">// 3</span></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">ceil</span>(f2) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;             <span class="comment">// -2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 回傳最接近、相對較小的整數</span></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">floor</span>(f1) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;            <span class="comment">// 與 2.7 接近的整數有 2 跟 3，取較小的，2</span></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">floor</span>(f2) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;            <span class="comment">// 與 -2.3 接近的整數有 -2 跟 -3，取較小的，-3</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 無條件捨去至整數位</span></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">trunc</span>(f1) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;            <span class="comment">// 2</span></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">trunc</span>(f2) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;            <span class="comment">// -2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 四捨五入至整數位</span></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">round</span>(f1) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;            <span class="comment">// 3</span></span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">round</span>(f2) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;            <span class="comment">// -2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+<p>如果想更加瞭解 &lt;cmath&gt; 函式庫，我推薦此網站 - <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/header/cmath">CppReference - Standard library header &lt;cmath&gt;</a>。<br>
+<br/></p>
+<h2 id="練習題"><a class="header-anchor" href="#練習題"></a>練習題</h2>
+<ol>
+<li>宣告一個函式 - calculate()，接受兩個整數參數，不回傳任何值。使用本文章介紹的標準函式庫的函式，分別計算出它們的最大公因數與最小公倍數，並將它們印出來。請使用以下代碼測試:</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 將 calculate() 的定義放在這</span></span><br><span class="line"><span class="comment">// 不回傳任何值，即是 void，所有步驟都在函式內完成</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calculate</span><span class="params">(<span class="comment">/* ... */</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Driver Code</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> num1 &#123; <span class="number">10</span> &#125;, num2 &#123; <span class="number">16</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">calculate</span>(num1, num2);   <span class="comment">// 2</span></span><br><span class="line">                             <span class="comment">// 80</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<br/>
+<ol start="2">
+<li>(進階題) 宣告一個函式 - getLength()，接受一個整數，回傳一個整數。在僅使用本章所介紹的函式的前提下，使此函式回傳接受數字的長度。請使用以下代碼測試:</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 將 getLength() 的定義放在這</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Driver Code</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 如果整數太長，可以用撇號 (&#x27;) 來分開數字，以方便閱讀。編譯器編譯時會忽略數字間的撇號</span></span><br><span class="line">    <span class="type">int</span> num1 &#123; <span class="number">2&#x27;147&#x27;483&#x27;647</span> &#125;, num2 &#123; <span class="number">563&#x27;723</span> &#125;, num3 &#123; <span class="number">1&#x27;462</span> &#125;, num4 &#123; <span class="number">84&#x27;265&#x27;197</span> &#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">getLength</span>(num1) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 10</span></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">getLength</span>(num2) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 6</span></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">getLength</span>(num3) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 4</span></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">getLength</span>(num4) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 8</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+<h2 id="結語"><a class="header-anchor" href="#結語"></a>結語</h2>
+<p>當我們緩緩落下本文的帷幕，回首來時路，我們一起經歷了 C++ 數學函式庫的奇妙之旅。從 &lt;numbers&gt; 的基石開始，穿越 &lt;numeric&gt; 的多元風采，直至 &lt;cmath&gt; 的廣闊天地，我們不僅探索了這些工具箱的無窮應用，更體會到它們在解織數學迷團中的力量，同時也點燃了我們內心的創造火花和解決問題的熱情。</p>
+<p>在這個技術層出不窮的世代中，持續學習和實踐成為了我們前進的動力。本文希望成為您踏入 C++ 廣袤世界的堅固跳板，讓您帶著更多的自信深入探索。記住，學習和吸納新知是一場永無止境的旅程，隨著時間的流轉，您將開啟更多可能性的大門，描繪出屬於自己的編程奇跡。</p>
+<p>期待下一篇文章，我們將航向流程控制的新世界，學習如何運用條件來引導我們的代碼，實現更多精彩的目標。讓我們繼續在 C++ 的宇宙中，揮灑更多的創意與智慧！<br>
+<br/></p>
+<h1>附件</h1>
+<h2 id="練習題解答"><a class="header-anchor" href="#練習題解答"></a>練習題解答</h2>
+<ol>
+<li>宣告一個函式 - calculate()，接受兩個整數參數，不回傳任何值。使用本文章介紹的標準函式庫的函式，分別計算出它們的最大公因數與最小公倍數，並將它們印出來。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;numeric&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calculate</span><span class="params">(<span class="type">const</span> <span class="type">int</span> num1, <span class="type">const</span> <span class="type">int</span> num2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">gcd</span>(num1, num2) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    std::cout &lt;&lt; std::<span class="built_in">lcm</span>(num1, num2) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> num1 &#123; <span class="number">10</span> &#125;, num2 &#123; <span class="number">16</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">calculate</span>(num1, num2);   <span class="comment">// 2</span></span><br><span class="line">                             <span class="comment">// 80</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+<ol start="2">
+<li>宣告一個函式 - getLength()，接受一個整數，回傳一個整數。在僅使用本章所介紹的函式的前提下，使此函式回傳接受數字的長度。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">getLength</span><span class="params">(<span class="type">const</span> <span class="type">int</span> number)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 這是個很有趣的解法，可以用在正負整數，唯獨 0 不能用 (std::log10(0) 未被定義)。</span></span><br><span class="line"><span class="comment">     * 步驟為下:</span></span><br><span class="line"><span class="comment">     * 1. 使用 std::abs() 數字變成 &quot;正整數&quot; (畢竟長度不會有負數)</span></span><br><span class="line"><span class="comment">     * 2. 使用 std::log10() 算出該數字是 10 的幾次方 (例如 1462 是 10 的 3.1649.... 次方)</span></span><br><span class="line"><span class="comment">     * 3. 使用 std::trunc() 無條件捨去小數位，留下整數</span></span><br><span class="line"><span class="comment">     * 4. 最後再 +1 ，完成計算</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 至於 0 怎麼辦呢？我們下一章就知道怎麼辦了！</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">trunc</span>(std::<span class="built_in">log10</span>(std::<span class="built_in">abs</span>(number))) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 如果整數太長，可以用撇號 (&#x27;) 來分開數字，以方便閱讀。編譯器編譯時會忽略數字間的撇號</span></span><br><span class="line">    <span class="type">int</span> num1 &#123; <span class="number">2&#x27;147&#x27;483&#x27;647</span> &#125;, num2 &#123; <span class="number">-563&#x27;723</span> &#125;, num3 &#123; <span class="number">1&#x27;462</span> &#125;, num4 &#123; <span class="number">84&#x27;265&#x27;197</span> &#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">getLength</span>(num1) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 10</span></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">getLength</span>(num2) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 6</span></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">getLength</span>(num3) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 4</span></span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">getLength</span>(num4) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;   <span class="comment">// 8</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lonesomecoder.com">The Lonesome Coder</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="https://lonesomecoder.com/2023-12-08/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B8%E5%AD%B8%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%9A%84%E7%B2%BE%E9%AB%93/">https://lonesomecoder.com/2023-12-08/第九章-數學標準函式庫的精髓/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://lonesomecoder.com" target="_blank">Lonesome Coder の Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/c/">C++</a><a class="post-meta__tags" href="/tags/coding/">Coding</a><a class="post-meta__tags" href="/tags/programming/">Programming</a><a class="post-meta__tags" href="/tags/standard-library/">Standard Library</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/" title="第八章 - 揭開函式的神秘面紗 (二)"><img class="cover" src="/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/Function.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第八章 - 揭開函式的神秘面紗 (二)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/" title="第八章 - 揭開函式的神秘面紗 (二)"><img class="cover" src="/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/Function.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-03</div><div class="title">第八章 - 揭開函式的神秘面紗 (二)</div></div></a></div><div><a href="/2023-11-28/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%B8%80/" title="第七章 - 揭開函式的神秘面紗 (一)"><img class="cover" src="/2023-11-28/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%B8%80/Abstract_Function.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-28</div><div class="title">第七章 - 揭開函式的神秘面紗 (一)</div></div></a></div><div><a href="/2023-11-25/%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%81%8B%E7%AE%97%E7%9A%84%E8%97%9D%E8%A1%93/" title="第六章 - 運算的藝術"><img class="cover" src="/2023-11-25/%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%81%8B%E7%AE%97%E7%9A%84%E8%97%9D%E8%A1%93/Binary_Rain.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-25</div><div class="title">第六章 - 運算的藝術</div></div></a></div><div><a href="/2023-11-22/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E8%88%87%E6%95%B8%E6%93%9A%E6%B5%81%E5%8B%95/" title="第五章 - 標準函式庫與數據流動"><img class="cover" src="/2023-11-22/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E8%88%87%E6%95%B8%E6%93%9A%E6%B5%81%E5%8B%95/Data_Flow.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-22</div><div class="title">第五章 - 標準函式庫與數據流動</div></div></a></div><div><a href="/2023-11-17/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/" title="第四章 - 正式啟航 - C++的變數和基石"><img class="cover" src="/2023-11-17/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%AD%A3%E5%BC%8F%E5%95%9F%E8%88%AA-c-%E7%9A%84%E8%AE%8A%E6%95%B8%E5%92%8C%E5%9F%BA%E7%9F%B3/First_Step.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-17</div><div class="title">第四章 - 正式啟航 - C++的變數和基石</div></div></a></div><div><a href="/2023-11-13/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E6%BA%96%E5%82%99-c-%E6%AD%B7%E5%8F%B2%E8%88%87%E6%BC%94%E5%8C%96/" title="第三章 - 最後準備 - C++歷史與演化"><img class="cover" src="/2023-11-13/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%9C%80%E5%BE%8C%E6%BA%96%E5%82%99-c-%E6%AD%B7%E5%8F%B2%E8%88%87%E6%BC%94%E5%8C%96/Embarkation.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-13</div><div class="title">第三章 - 最後準備 - C++歷史與演化</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 評論</span></div></div><div class="comment-wrap"><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my_icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">The Lonesome Coder</div><div class="author-info__description">Coding Futures. Decoding Dreams. One Line at a Time.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/The-Lonesome-Coder" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://www.instagram.com/the.lonesome.coder/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram" style="color: #d62976;"></i></a><a class="social-icon" href="mailto:admin@lonesomecoder.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">本文</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB-numbers"><span class="toc-number">1.2.</span> <span class="toc-text">標準函式庫 - &lt;numbers&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB-numeric"><span class="toc-number">1.3.</span> <span class="toc-text">標準函式庫 - &lt;numeric&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB-cmath"><span class="toc-number">1.4.</span> <span class="toc-text">標準函式庫 - &lt;cmath&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B7%B4%E7%BF%92%E9%A1%8C"><span class="toc-number">1.5.</span> <span class="toc-text">練習題</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B5%90%E8%AA%9E"><span class="toc-number">1.6.</span> <span class="toc-text">結語</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">附件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B7%B4%E7%BF%92%E9%A1%8C%E8%A7%A3%E7%AD%94"><span class="toc-number">2.1.</span> <span class="toc-text">練習題解答</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023-12-08/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B8%E5%AD%B8%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%9A%84%E7%B2%BE%E9%AB%93/" title="第九章 - 數學標準函式庫的精髓"><img src="/2023-12-08/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B8%E5%AD%B8%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%9A%84%E7%B2%BE%E9%AB%93/Library.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第九章 - 數學標準函式庫的精髓"/></a><div class="content"><a class="title" href="/2023-12-08/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B8%E5%AD%B8%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%9A%84%E7%B2%BE%E9%AB%93/" title="第九章 - 數學標準函式庫的精髓">第九章 - 數學標準函式庫的精髓</a><time datetime="2023-12-08T07:00:00.000Z" title="發表於 2023-12-08 15:00:00">2023-12-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/" title="第八章 - 揭開函式的神秘面紗 (二)"><img src="/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/Function.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第八章 - 揭開函式的神秘面紗 (二)"/></a><div class="content"><a class="title" href="/2023-12-03/%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%BA%8C/" title="第八章 - 揭開函式的神秘面紗 (二)">第八章 - 揭開函式的神秘面紗 (二)</a><time datetime="2023-12-03T07:00:00.000Z" title="發表於 2023-12-03 15:00:00">2023-12-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023-11-28/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%B8%80/" title="第七章 - 揭開函式的神秘面紗 (一)"><img src="/2023-11-28/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%B8%80/Abstract_Function.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第七章 - 揭開函式的神秘面紗 (一)"/></a><div class="content"><a class="title" href="/2023-11-28/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%8F%AD%E9%96%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%B4%97-%E4%B8%80/" title="第七章 - 揭開函式的神秘面紗 (一)">第七章 - 揭開函式的神秘面紗 (一)</a><time datetime="2023-11-28T07:00:00.000Z" title="發表於 2023-11-28 15:00:00">2023-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023-11-25/%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%81%8B%E7%AE%97%E7%9A%84%E8%97%9D%E8%A1%93/" title="第六章 - 運算的藝術"><img src="/2023-11-25/%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%81%8B%E7%AE%97%E7%9A%84%E8%97%9D%E8%A1%93/Binary_Rain.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第六章 - 運算的藝術"/></a><div class="content"><a class="title" href="/2023-11-25/%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%81%8B%E7%AE%97%E7%9A%84%E8%97%9D%E8%A1%93/" title="第六章 - 運算的藝術">第六章 - 運算的藝術</a><time datetime="2023-11-25T07:00:00.000Z" title="發表於 2023-11-25 15:00:00">2023-11-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023-11-22/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E8%88%87%E6%95%B8%E6%93%9A%E6%B5%81%E5%8B%95/" title="第五章 - 標準函式庫與數據流動"><img src="/2023-11-22/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E8%88%87%E6%95%B8%E6%93%9A%E6%B5%81%E5%8B%95/Data_Flow.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第五章 - 標準函式庫與數據流動"/></a><div class="content"><a class="title" href="/2023-11-22/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E8%88%87%E6%95%B8%E6%93%9A%E6%B5%81%E5%8B%95/" title="第五章 - 標準函式庫與數據流動">第五章 - 標準函式庫與數據流動</a><time datetime="2023-11-22T07:00:00.000Z" title="發表於 2023-11-22 15:00:00">2023-11-22</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/Footer.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By The Lonesome Coder</div><div class="framework-info"><span>框架 </span><a href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">非常感謝您光臨我的部落格</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直達評論"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const disqus_config = function () {
+    this.page.url = 'https://lonesomecoder.com/2023-12-08/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B8%E5%AD%B8%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%9A%84%E7%B2%BE%E9%AB%93/'
+    this.page.identifier = '/2023-12-08/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B8%E5%AD%B8%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%9A%84%E7%B2%BE%E9%AB%93/'
+    this.page.title = '第九章 - 數學標準函式庫的精髓'
+  }
+
+  const disqusReset = () => {
+    window.DISQUS && window.DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  btf.addGlobalFn('themeChange', disqusReset, 'disqus')
+
+  const loadDisqus = () =>{
+    if (window.DISQUS) disqusReset()
+    else {
+      const script = document.createElement('script')
+      script.src = 'https://https-lonesomecoder-com.disqus.com/embed.js'
+      script.setAttribute('data-timestamp', +new Date())
+      document.head.appendChild(script)
+    }
+  }
+
+  const getCount = async() => {
+    try {
+      const eleGroup = document.querySelector('#post-meta .disqus-comment-count')
+      if (!eleGroup) return
+      const cleanedLinks = eleGroup.href.replace(/#post-comment$/, '')
+
+      const res = await fetch(`https://disqus.com/api/3.0/threads/set.json?forum=https-lonesomecoder-com&api_key=&thread:link=${cleanedLinks}`,{
+        method: 'GET'
+      })
+      const result = await res.json()
+
+      const count = result.response.length ? result.response[0].posts : 0
+      eleGroup.textContent = count
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if ('Disqus' === 'Disqus' || !false) {
+    if (false) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+    else {
+      loadDisqus()
+      
+    }
+  } else {
+    window.loadOtherComment = loadDisqus
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.8" zIndex="-1" count="80" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜尋</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div></body></html>
